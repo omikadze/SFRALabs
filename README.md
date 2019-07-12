@@ -1,13 +1,37 @@
 # SFRA Labs
 
-Index:
+**Table of context:**
 - [SFRA Labs](#SFRA-Labs)
+  - [Getting Started with SFRA](#Getting-Started-with-SFRA)
   - [Lab1](#Lab1)
       - [Summary](#Summary)
       - [Goals](#Goals)
       - [Requirements](#Requirements)
       - [Sample](#Sample)
   - [Lab2](#Lab2)
+
+
+## Getting Started with SFRA
+
+The SFRA (Storefront Reference Architecture) reference application provides two sample sites:
+
+- RefArch
+- RefArchGlobal
+
+SFRA also provides associated data and code to drive the sample ecommerce storefront.
+
+The SFRA reference application represents Commerce Cloud's current recommended approach for implementing digital storefronts. If you're creating a site, use the SFRA reference application as a starting point.
+
+To get started with SFRA, you have to perform some preliminary steps:
+
+- [Obtain a GitHub account if you don't already have one](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSFRA%2FSFRASetup.html)
+- [Build SFRA and push the code to the server](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSFRA%2FBuildingSFRA.html)
+- [Uploading Code for SFRA](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=/com.demandware.dochelp/SFRA/ConfiguringSFRA.html)
+- [Configure SFRA for your instance so that you can see products and catalogs on the sample storefront](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSFRA%2FConfiguringSFRA.html)
+
+
+After your environment is set up, you can run the SFRA reference application and explore how it is constructed.
+
 
 ## Lab1
 
@@ -63,7 +87,7 @@ b) ask a friend (in this mode, please show UI like on the attached picture) - im
 
 First of all you should create a "Form definition" that describes the data you need from the form, the data validation, and the system objects you want to store the data in.
 
-- app_custom_cartrdge/cartrdge/forms/default/customForm.xml
+- app_custom_cartrdge/cartridge/forms/default/customForm.xml
 
 ```javascript
     <?xml version="1.0"?>
