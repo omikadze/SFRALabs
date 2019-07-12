@@ -1,7 +1,13 @@
 # SFRA Labs
 
 Index:
-1. [Lab1](#Lab1)
+- [SFRA Labs](#SFRA-Labs)
+  - [Lab1](#Lab1)
+      - [Summary](#Summary)
+      - [Goals](#Goals)
+      - [Requirements](#Requirements)
+      - [Sample](#Sample)
+  - [Lab2](#Lab2)
 
 ## Lab1
 
@@ -212,3 +218,7 @@ This template prints the form field label and data stored from the form.
         </body>
     </html>
 ```
+
+
+
+## Lab2
