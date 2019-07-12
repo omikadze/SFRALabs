@@ -1,11 +1,21 @@
 #SFRA Labs
+
+
 ##Lab1
+
+
 ####Summary
+
 Task is dedicated to establish/improve/increase skills and knowledge of SFRA Forms and related functionality.
+
+
 ####Goals
+
     - Revise SFRA form's definitions;
     - Revise SFRA form's validation;
     - Work with form actions and build custom logic;
+
+
 ####Requirements
 
  1. Create form definition with the following items:
@@ -18,7 +28,7 @@ Task is dedicated to establish/improve/increase skills and knowledge of SFRA For
         - simple mode (selected by default)
         - ask a friend (in this mode, please show UI like on the attached picture)
 
-2. Create custom controller with the related to the task logic. It should contains such parts as:
+1. Create custom controller with the related to the task logic. It should contains such parts as:
     - clear form
     - populate form with value
     - validate/invalidate form
@@ -26,9 +36,9 @@ Task is dedicated to establish/improve/increase skills and knowledge of SFRA For
     - several interaction nodes or dynamic interaction node
     - particular interaction templates
 
-3. Create error and successful resource messages inside the "resource/" directory in cartridge in order to display them accordingly
+2. Create error and successful resource messages inside the "resource/" directory in cartridge in order to display them accordingly
 
-4. Generally, the form should be validated on the client side(please add particular min/max length values and regexp for form-item values) as well as on the server side.
+3. Generally, the form should be validated on the client side(please add particular min/max length values and regexp for form-item values) as well as on the server side.
 Submit different form actions depending on check boxes or radio buttons values and react on triggered action accordingly.
 Show error messages if form is invalid as well as successfull message after submission.
 
