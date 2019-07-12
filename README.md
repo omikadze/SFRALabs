@@ -2,11 +2,13 @@
 
 Index:
 
-1. [Lab1](Lab1)
 
+1. [Lab1][1]
 
 ## Lab1
 
+Alt-Lab1
+======
 
 #### Summary
 
@@ -15,9 +17,9 @@ Task is dedicated to establish/improve/increase skills and knowledge of SFRA For
 
 #### Goals
 
-    - Revise SFRA form's definitions;
-    - Revise SFRA form's validation;
-    - Work with form actions and build custom logic;
+- Revise SFRA form's definitions;
+- Revise SFRA form's validation;
+- Work with form actions and build custom logic;
 
 
 #### Requirements
@@ -54,15 +56,15 @@ b) ask a friend (in this mode, please show UI like on the attached picture) - im
 
 ![](./Screenshot_2.png)
 
-####Sample
+#### Sample
 
 **1. Creating a Form**
 
 First of all you should create a "Form definition" that describes the data you need from the form, the data validation, and the system objects you want to store the data in.
 
-****
-app_custom_cartrdge/cartrdge/forms/default/customForm.xml
+- app_custom_cartrdge/cartrdge/forms/default/customForm.xml
 
+```javascript
     <?xml version="1.0"?>
     <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
 
@@ -73,7 +75,8 @@ app_custom_cartrdge/cartrdge/forms/default/customForm.xml
 
 	    <action formid="submit" valid-form="true" />
     </form>
-****
+```
+
 The form definition determines the structure of the in-memory form object. The in-memory form object persists data during the session, unless you explicitly clear the data.
 
 In the Storefront Reference Architecture (SFRA), the first step to create a form is to create a JSON object to contain the form data. The server.getForm function uses the form definition to create this object.
@@ -91,10 +94,9 @@ See also:
 
 The controller in this example exposes a Start function that renders an empty form.The Start function sets the actionURL that's used to handle the submit action for the form and creates a JSON object based on the form definition.
 
-****
 
-app_custom_cartridge/cartridge/controllers/CustomPage.js
-
+- app_custom_cartridge/cartridge/controllers/CustomPage.js
+```javascript
     'use strict';
 
     var server = require('server');
@@ -113,8 +115,8 @@ app_custom_cartridge/cartridge/controllers/CustomPage.js
     });
 
     module.exports = server.exports();
+```
 
-****
 See also [Using API Form Classes](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FForms%2FUsingapiformclasses.html)
 
 
@@ -126,8 +128,8 @@ The client-side JavaScript and css files are included using the **assets.js** mo
 
 The form action uses the **actionUrl** property passed to it by the controller.
 
-**app_custom_cartridge/cartridge/templates/default/customPage.isml**
-
+- app_custom_cartridge/cartridge/templates/default/customPage.isml
+```javascript
     <isdecorate template="common/layout/page">
 
         <form action="${pdict.actionUrl}" class="custom" method="POST">
@@ -160,6 +162,7 @@ The form action uses the **actionUrl** property passed to it by the controller.
             <div><button type="submit" class="btn btn-primary">${Resource.msg('button.text.submit', 'login', null)}</button></div>
         </form>
     </isdecorate>
+```
 
 Update the **login.properties** file(Ctrl+P to find this file globaly).
 Add this line: **button.text.submit=Submit**
@@ -173,9 +176,9 @@ Add this line: **button.text.submit=Submit**
 After a form is submitted, data from the form is available as part of the **req.form** property. In the following example, the fields entered in the original form is passed to a new template for rendering.
 
 
-**app_custom_cartridge/cartridge/controllers/customPageResult.js**
+- app_custom_cartridge/cartridge/controllers/customPageResult.js
 
-
+```javascript
     'use strict';
     var server = require('server');
     var URLUtils = require('dw/web/URLUtils');
@@ -198,12 +201,14 @@ After a form is submitted, data from the form is available as part of the **req.
     });
 
     module.exports = server.exports();
+```
 
 **4. Form Result Template**
 This template prints the form field label and data stored from the form.
 
-**app_custom_cartridge/cartridge/templates/default/customPageResult.isml**
+- app_custom_cartridge/cartridge/templates/default/customPageResult.isml
 
+```html
     <iscontent type="text/html" charset="UTF-8" compact="true" />
     <html>
         <body>
@@ -211,3 +216,4 @@ This template prints the form field label and data stored from the form.
             <p>Nice to meet you, ${pdict.lastname}, ${pdict.firstname}. <br/> Check your email. Is it ${pdict.email}.<br/> Actually you've said that: ${pdict.comment}</p>
         </body>
     </html>
+```
