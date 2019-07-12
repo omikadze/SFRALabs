@@ -1,22 +1,26 @@
-#SFRA Labs
+# SFRA Labs
+
+Index:
+
+1. [Lab1](Lab1)
 
 
-##Lab1
+## Lab1
 
 
-####Summary
+#### Summary
 
 Task is dedicated to establish/improve/increase skills and knowledge of SFRA Forms and related functionality.
 
 
-####Goals
+#### Goals
 
     - Revise SFRA form's definitions;
     - Revise SFRA form's validation;
     - Work with form actions and build custom logic;
 
 
-####Requirements
+#### Requirements
 
  1. Create form definition with the following items:
 
