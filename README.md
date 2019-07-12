@@ -1,14 +1,9 @@
 # SFRA Labs
 
 Index:
-
-
-1. [Lab1][1]
+1. [Lab1](#Lab1)
 
 ## Lab1
-
-Alt-Lab1
-======
 
 #### Summary
 
