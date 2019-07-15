@@ -206,7 +206,7 @@ In this lab we summarize all work done in 4 previous WTs. You need to find in BM
 
 1. Go to *BM* ⇒ *Site Genesis* ⇒ *Merchant Tools* ⇒ *Products And Catalogs* ⇒ *Products* find any product and get it's ID.
 2. Run the controller with a valid product in the query string, for example:
-   http://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/ShowProduct-Main?product=4(replace "your-sandbox-name" with a proper domain name of your sandbox).
+   http://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/ShowProduct-Main?product=4 (replace "your-sandbox-name" with a proper domain name of your sandbox).
 
    Verify that the product name appears.
 
