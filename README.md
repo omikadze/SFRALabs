@@ -7,7 +7,8 @@
   - [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
   - [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
   - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
-  - [Lab4: SFRA Forms](#Lab4-SFRA-Forms)
+  - [Lab4: Templates](#Lab4-Templates)
+  - [Lab5: SFRA Forms](#Lab5-SFRA-Forms)
       - [Summary](#Summary)
       - [Goals](#Goals)
       - [Requirements](#Requirements)
@@ -183,11 +184,20 @@ module.exports = server.exports();
 
    6. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
 
+## Lab4: Templates
+
+1. Create ISML template lab4/product.isml which shows the name of the Product. For this we use name property of the Product object, passed to the template by the controller:
+    ![](Screenshot_16.png)
+
+2. Create ISML template lab4/productnotfound.isml with some simple text describing that the system can't find such product.
+3. Request the ShowProduct-Start controller appending a URL query string containing the product id: ShowProduct-Start?product=54399.
+4. Debug and verify.
+     ![](Screenshot_17.png)
+5. Commit and Push to new branch, create Pull Request
 
 
 
-
-## Lab4: SFRA Forms
+## Lab5: SFRA Forms
 
 #### Summary
 
