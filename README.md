@@ -177,14 +177,14 @@ module.exports = server.exports();
 **3. Start a Debugging Session**   
    1. On the Debugger tab in the dropdown list at the top choose your demandware configuration and start a debugging session (press the green arrow or F5). Debugger panel should appear at the top and a message about successful connection should be printed in the Debug Console at the bottom.
 
-        ![](Screenshot_13.png)
+        ![](Screenshot_19.png)
 
    2. Open ShowProduct controller in VSC and add breakpoint on some of variables declaration lines. It should also appear in Breakpoints section in VSC.
-            ![](Screenshot_14.png)
+            ![](Screenshot_18.png)
 
    4. In a browser call ShowProduct-Start endpoint with random product ID like 123456, the url should look like: "...dware.net/on/demandware.store/Sites-SiteGenesis-Site/default/ShowProduct-Start?product=123456"
    5. After url entered debugger will catch the breakpoint, stop execution and show current variables:
-        ![](Screenshot_15.png)
+        ![](Screenshot_20.png)
 
 
    6. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
