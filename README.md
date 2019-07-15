@@ -9,7 +9,8 @@
   - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
   - [Lab4: Templates](#Lab4-Templates)
   - [Lab5: Script Debugging](#Lab5-Script-Debugging)
-  - [Lab6: SFRA Forms](#Lab6-SFRA-Forms)
+  - [Lab6:](#Lab6)
+  - [Lab7: SFRA Forms](#Lab7-SFRA-Forms)
 
 ## Setting Up and Installing SFRA
 
@@ -163,7 +164,7 @@ module.exports = server.exports();
     ![](Screenshot_9.png)
 
 2. In the dropdown list at the top choose "Add configuration":
-     ![](Screenshot_10.png)
+    ![](Screenshot_10.png)
 
 3. Right after launch.json should be automatically opened and a list of possible configurations shown. Choose "Demandware Debugger", check default values of launch.json - you should see something like at the screen below, and save the file:
 
@@ -234,9 +235,9 @@ In this lab we summarize all work done in 4 previous WTs. You need to find in BM
 
 5. Commit and Push to new branch, create Pull Request
 
+## Lab6: 
 
-
-## Lab6: SFRA Forms
+## Lab7: SFRA Forms
 
 **Summary**
 
