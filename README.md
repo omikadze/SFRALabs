@@ -6,12 +6,12 @@
   - [Configure DwithEasy Extension for Chrome](#Configure-DwithEasy-Extension-for-Chrome)
   - [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
   - [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
-  - [Lab3: SFRA Forms](#Lab3-SFRA-Forms)
+  - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
+  - [Lab4: SFRA Forms](#Lab4-SFRA-Forms)
       - [Summary](#Summary)
       - [Goals](#Goals)
       - [Requirements](#Requirements)
       - [Sample](#Sample)
-  - [Lab3](#Lab3)
 
 ## Setting Up and Installing SFRA
 
@@ -118,7 +118,76 @@ If you had any problems in [Lab1](#Lab1-Creating-the-Hello-Controller) you can f
    4. Retest the Hello-World controller to make sure it works.
 
 
-## Lab3: SFRA Forms
+## Lab3: Using the Controller Debugger
+
+This lab is about using debugger to debug controller execution. For this you need to create a controller, which gets the product by its ID, to create a Debug Configuration, start a Debugging Session and troubleshoot Debug Sessions. Please keep in mind, that described below debugger will work only for backend controllers, but not for frontend JS components.
+
+**Important:** Please keep in mind that leaving debugger session idle for a long time could cause your Sandbox getting freezed.
+
+**1. Get a Product using a Controller.**
+   1. Save the *Hello* controller as *ShowProduct*.
+   2. Use  *getProduct* method of *ProductMgr* to get product by it's ID, use the code below as an example. Please pay attention, that the controller expects productID to be passed as an url parameter. You could also notice that the controller renders two templates, which you didn't do so far - skip this detail for now, it will be explained in the next walkthrough.
+
+```javascript
+'use strict';
+
+var server = require('server');
+var ProductMgr = require('dw/catalog/ProductMgr');
+
+server.get('Main', function (req, res, next) {
+  var params = request.httpParameterMap;
+  var productID = params.product.stringValue;
+  var product = ProductMgr.getProduct(productID);
+
+  if (product) {
+    res.render('product/producttemplate', { Product: product });
+  } else {
+    res.render('product/productnotfound');
+  }
+  next();
+});
+
+module.exports = server.exports();
+```
+
+**2. Create Debug Configuration**
+
+1. Go to Debugger tab (Ctrl + Shift + D)
+
+    ![](Screenshot_9.png)
+
+2. In the dropdown list at the top choose "Add configuration":
+     ![](Screenshot_10.png)
+
+3. Right after launch.json should be automatically opened and a list of possible configurations shown. Choose "Demandware Debugger", check default values of launch.json - you should see something like at the screen below, and save the file:
+
+    ![](Screenshot_11.png)
+    ![](Screenshot_12.png)
+
+
+4. Now the debugger should be configured and ready to use.
+
+
+**3. Start a Debugging Session**   
+   1. On the Debugger tab in the dropdown list at the top choose your demandware configuration and start a debugging session (press the green arrow or F5). Debugger panel should appear at the top and a message about successful connection should be printed in the Debug Console at the bottom.
+
+        ![](Screenshot_13.png)
+
+   2. Open ShowProduct controller in VSC and add breakpoint on some of variables declaration lines. It should also appear in Breakpoints section in VSC.
+            ![](Screenshot_14.png)
+
+   4. In a browser call ShowProduct-Start endpoint with random product ID like 123456, the url should look like: "...dware.net/on/demandware.store/Sites-SiteGenesis-Site/default/ShowProduct-Start?product=123456"
+   5. After url entered debugger will catch the breakpoint, stop execution and show current variables:
+        ![](Screenshot_15.png)
+
+
+   6. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
+
+
+
+
+
+## Lab4: SFRA Forms
 
 #### Summary
 
@@ -172,7 +241,7 @@ b) ask a friend (in this mode, please show UI like on the attached picture) - im
 
 First of all you should create a "Form definition" that describes the data you need from the form, the data validation, and the system objects you want to store the data in.
 
-- app_custom_cartrdge/cartridge/forms/default/customForm.xml
+- *app_custom_cartrdge/cartridge/forms/default/customForm.xml*
 
 ```javascript
     <?xml version="1.0"?>
@@ -197,15 +266,12 @@ See also:
 [ Form Definition Elements](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FForms%2FFormDefinitionElements.html) and [ What Is a Form Definition](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FForms%2FWhatisaformdefinition.html)
 
 
-
-
-
 **2. Controller to Render the Form**
 
 The controller in this example exposes a Start function that renders an empty form.The Start function sets the actionURL that's used to handle the submit action for the form and creates a JSON object based on the form definition.
 
 
-- app_custom_cartridge/cartridge/controllers/CustomPage.js
+- *app_custom_cartridge/cartridge/controllers/CustomPage.js*
 ```javascript
     'use strict';
 
@@ -238,7 +304,7 @@ The client-side JavaScript and css files are included using the **assets.js** mo
 
 The form action uses the **actionUrl** property passed to it by the controller.
 
-- app_custom_cartridge/cartridge/templates/default/customPage.isml
+- *app_custom_cartridge/cartridge/templates/default/customPage.isml*
 ```javascript
     <isdecorate template="common/layout/page">
 
@@ -286,7 +352,7 @@ Add this line: **button.text.submit=Submit**
 After a form is submitted, data from the form is available as part of the **req.form** property. In the following example, the fields entered in the original form is passed to a new template for rendering.
 
 
-- app_custom_cartridge/cartridge/controllers/customPageResult.js
+- *app_custom_cartridge/cartridge/controllers/customPageResult.js*
 
 ```javascript
     'use strict';
@@ -327,7 +393,3 @@ This template prints the form field label and data stored from the form.
         </body>
     </html>
 ```
-
-
-
-## Lab3
