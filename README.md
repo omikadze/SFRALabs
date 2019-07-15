@@ -52,7 +52,7 @@ After your environment is set up, you can run the SFRA reference application and
 Navigate to your custom cartridge (in my case it's "*app_custom_storefront*") and create *Hello.js* controller.
 
 - *your_cartridge_name/cartridge/controllers/Hello.js*
-  
+
 ```javascript
 'use strict';
 
@@ -180,24 +180,35 @@ module.exports = server.exports();
         ![](Screenshot_19.png)
 
    2. Open ShowProduct controller in VSC and add breakpoint on some of variables declaration lines. It should also appear in Breakpoints section in VSC.
-            ![](Screenshot_18.png)
+        ![](Screenshot_18.png)
 
-   4. In a browser call ShowProduct-Start endpoint with random product ID like 123456, the url should look like: "...dware.net/on/demandware.store/Sites-SiteGenesis-Site/default/ShowProduct-Start?product=123456"
-   5. After url entered debugger will catch the breakpoint, stop execution and show current variables:
+   3. In a browser call ShowProduct-Start endpoint with random product ID like 123456, the url should look like: "...dware.net/on/demandware.store/Sites-RefArch-Site/en_US/ShowProduct-Main?product=4"
+   4. After url entered debugger will catch the breakpoint, stop execution and show current variables:
         ![](Screenshot_20.png)
 
 
-   6. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
+   5. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
 
 ## Lab4: Templates
 
 1. Create ISML template lab4/product.isml which shows the name of the Product. For this we use name property of the Product object, passed to the template by the controller:
-    ![](Screenshot_16.png)
+        ![](Screenshot_16.png)
 
 2. Create ISML template lab4/productnotfound.isml with some simple text describing that the system can't find such product.
+
+    ```javascript
+    <html>
+        <head>
+            <title>Hello</title>
+        </head>
+        <body>
+            <h1>${pdict.Log}</h1>
+        </body>
+    </html>
+    ```
 3. Request the ShowProduct-Start controller appending a URL query string containing the product id: ShowProduct-Start?product=54399.
 4. Debug and verify.
-     ![](Screenshot_17.png)
+        ![](Screenshot_22.png)
 5. Commit and Push to new branch, create Pull Request
 
 ## Lab5: Script Debugging
