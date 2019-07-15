@@ -8,11 +8,8 @@
   - [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
   - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
   - [Lab4: Templates](#Lab4-Templates)
-  - [Lab5: SFRA Forms](#Lab5-SFRA-Forms)
-      - [Summary](#Summary)
-      - [Goals](#Goals)
-      - [Requirements](#Requirements)
-      - [Sample](#Sample)
+  - [Lab5: Script Debugging](#Lab5-Script-Debugging)
+  - [Lab6: SFRA Forms](#Lab6-SFRA-Forms)
 
 ## Setting Up and Installing SFRA
 
@@ -127,27 +124,35 @@ This lab is about using debugger to debug controller execution. For this you nee
 
 **1. Get a Product using a Controller.**
    1. Save the *Hello* controller as *ShowProduct*.
+
    2. Use  *getProduct* method of *ProductMgr* to get product by it's ID, use the code below as an example. Please pay attention, that the controller expects productID to be passed as an url parameter. You could also notice that the controller renders two templates, which you didn't do so far - skip this detail for now, it will be explained in the next walkthrough.
 
 ```javascript
 'use strict';
-
 var server = require('server');
 var ProductMgr = require('dw/catalog/ProductMgr');
 
 server.get('Main', function (req, res, next) {
-  var params = request.httpParameterMap;
-  var productID = params.product.stringValue;
+  var params = req.httpHeaders;
+
+  var productID = params.containsKey('x-is-query_string') ? params.get('x-is-query_string').split('=')[1] : null;
+  
+  //Equivalent for previous line
+  // if ('x-is-query_string' in params) {
+  //   productID = params.get('x-is-query_string').split('=')[1];
+  // } else {
+  //   productID = null;
+  // }
+
   var product = ProductMgr.getProduct(productID);
 
   if (product) {
-    res.render('product/producttemplate', { Product: product });
+    res.render('productlab4/product', { Product: product });
   } else {
-    res.render('product/productnotfound');
+    res.render('productlab4/productnf', { Log: 'the product was not found: ' + productID });
   }
   next();
 });
-
 module.exports = server.exports();
 ```
 
@@ -195,23 +200,44 @@ module.exports = server.exports();
      ![](Screenshot_17.png)
 5. Commit and Push to new branch, create Pull Request
 
+## Lab5: Script Debugging
+
+In this lab we summarize all work done in 4 previous WTs. You need to find in BM some product's ID, to form a proper request string and to debug the execution of the controller for both existing and nonexisting (in the catalog) product ID.
+
+1. Go to *BM* ⇒ *Site Genesis* ⇒ *Merchant Tools* ⇒ *Products And Catalogs* ⇒ *Products* find any product and get it's ID.
+2. Run the controller with a valid product in the query string, for example:
+   http://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/ShowProduct-Main?product=4(replace "your-sandbox-name" with a proper domain name of your sandbox).
+
+   Verify that the product name appears.
+
+3. Debug the ShowProduct script:
+   1. In your IDE go into the debugging mode, start debugging session.
+   2. Add some breakpoints in the ShowProduct-Start controller.
+   3. Call the controller in a browser using proper query string.
+   4. Step over all the code in the script (use F5 or F6).
+   5. Execute through the end of the controller (F8).
 
 
-## Lab5: SFRA Forms
+4. Call ShowProduct-Start on browser for some invalid product ID, verify if proper message appears.
 
-#### Summary
+
+5. Commit and Push to new branch, create Pull Request
+
+
+
+## Lab6: SFRA Forms
+
+**Summary**
 
 Task is dedicated to establish/improve/increase skills and knowledge of SFRA Forms and related functionality.
 
-
-#### Goals
+**Goals**
 
 - Revise SFRA form's definitions;
 - Revise SFRA form's validation;
 - Work with form actions and build custom logic;
 
-
-#### Requirements
+**Requirements**
 
 1. Create form definition with the following items:
 
@@ -245,7 +271,7 @@ b) ask a friend (in this mode, please show UI like on the attached picture) - im
 
 ![](./Screenshot_2.png)
 
-#### Sample
+**Sample**
 
 **1. Creating a Form**
 
@@ -272,7 +298,7 @@ In the Storefront Reference Architecture (SFRA), the first step to create a form
 
 Data from the form is accessible in templates using the pdict variable. However, the form is available only if the server.getForm object is passed to the template by the controller.
 
-See also: 
+See also:
 [ Form Definition Elements](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FForms%2FFormDefinitionElements.html) and [ What Is a Form Definition](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FForms%2FWhatisaformdefinition.html)
 
 
