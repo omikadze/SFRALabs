@@ -2,16 +2,17 @@
 
 **Table of context:**
 - [SFRA Labs](#SFRA-Labs)
-  - [Getting Started with SFRA](#Getting-Started-with-SFRA)
-  - [Lab1](#Lab1)
+  - [Setting Up and Installing SFRA](#Setting-Up-and-Installing-SFRA)
+  - [Configure DwithEasy Extension for Chrome](#Configure-DwithEasy-Extension-for-Chrome)
+  - [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
+  - [Lab2: SFRA Forms](#Lab2-SFRA-Forms)
       - [Summary](#Summary)
       - [Goals](#Goals)
       - [Requirements](#Requirements)
       - [Sample](#Sample)
   - [Lab2](#Lab2)
 
-
-## Getting Started with SFRA
+## Setting Up and Installing SFRA
 
 The SFRA (Storefront Reference Architecture) reference application provides two sample sites:
 
@@ -33,7 +34,22 @@ To get started with SFRA, you have to perform some preliminary steps:
 After your environment is set up, you can run the SFRA reference application and explore how it is constructed.
 
 
-## Lab1
+
+## Configure DwithEasy Extension for Chrome
+
+1. Follow this [link](https://forkpoint.com/products/dwithease/) and click "ADD TO GOOGLE CHROME" button to install extension.
+2. ![](./Screenshot_5.png)
+3. ![](./Screenshot_6.png)
+4. ![](./Screenshot_7.png)
+5. Fill the form and click Save
+   ![](./Screenshot_8.png)
+6. Now you can navigate to your Chrome extnesions, find the DWithEasy logo and work with your sandbox.
+
+
+## Lab1: Creating the Hello Controller
+
+
+## Lab2: SFRA Forms
 
 #### Summary
 
