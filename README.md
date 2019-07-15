@@ -10,7 +10,7 @@
       - [Goals](#Goals)
       - [Requirements](#Requirements)
       - [Sample](#Sample)
-  - [Lab2](#Lab2)
+  - [Lab3](#Lab3)
 
 ## Setting Up and Installing SFRA
 
@@ -47,6 +47,51 @@ After your environment is set up, you can run the SFRA reference application and
 
 
 ## Lab1: Creating the Hello Controller
+
+**1. Create Hello.js controller**
+
+Navigate to your custom cartridge (in my case it's "*app_custom_storefront*") and create *Hello.js* controller.
+
+- *your_cartridge_name/cartridge/controllers/Hello.js*
+  
+```javascript
+'use strict';
+
+var server = require('server');
+
+
+server.get('Show', function (req, res, next) {
+    res.render('hello/helloTemplate');
+    next();
+});
+
+module.exports = server.exports();
+```
+
+**2. Create template helloTemplate.isml**
+
+Navigate to *your_cartridge_name/cartridge/templates/dafault/hello* folder and create helloTemplate.isml file.
+
+- *your_cartridge_name/cartridge/templates/dafault/hello/helloTemplate*
+
+```html
+<html>
+    <head>
+        <title>Hello</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+</html>
+```
+
+**3. Check your endpoint in browser**
+
+Go to *https://astound02-alliance-prtnr-na03-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/Hello-Show* in your browser. And check or it works.
+**Do not forget to change url with your sandbox name**
+
+**4. If all works commit and push it to your branch**
+
 
 
 ## Lab2: SFRA Forms
@@ -261,4 +306,4 @@ This template prints the form field label and data stored from the form.
 
 
 
-## Lab2
+## Lab3
