@@ -9,7 +9,8 @@
   - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
   - [Lab4: Templates](#Lab4-Templates)
   - [Lab5: Script Debugging](#Lab5-Script-Debugging)
-  - [Lab6:](#Lab6)
+  - [Lab6: Reusing Code with a Decorator](#Lab6-Reusing-Code-with-a-Decorator)
+  - [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
   - [Lab7: SFRA Forms](#Lab7-SFRA-Forms)
 
 ## Setting Up and Installing SFRA
@@ -137,7 +138,7 @@ server.get('Main', function (req, res, next) {
   var params = req.httpHeaders;
 
   var productID = params.containsKey('x-is-query_string') ? params.get('x-is-query_string').split('=')[1] : null;
-  
+
   //Equivalent for previous line
   // if ('x-is-query_string' in params) {
   //   productID = params.get('x-is-query_string').split('=')[1];
@@ -235,7 +236,88 @@ In this lab we summarize all work done in 4 previous WTs. You need to find in BM
 
 5. Commit and Push to new branch, create Pull Request
 
-## Lab6: 
+
+
+## Lab6: Reusing Code with a Decorator
+
+One more good way to reuse existing code is to use decorators. Decorator is an ISML template with which some content could be wrapped. Decorators are typically named with "pt_" prefix. In this WT you need to wrap a template with a decorator, to verify it's work and to find decorators used on the page using Storefront Toolkit.
+
+1. Study an existing Decorator.
+   1. Locate the common/layout/page template.
+   2. Notice the different areas of the page this decorator defines.
+   3. Locate and study the  *isreplace*  tag.
+2. Using a Decorator.
+   1. Open the product.isml template, which you rendered in ShowProduct controller.
+   2. In the product.isml, add the common/layout/page decorator so it wraps the existing content on the page:
+
+    ```html
+        <isdecorate template="common/layout/page">
+            <isscript>
+                var assets = require('*/cartridge/scripts/assets');
+                assets.addJs('/js/productTile.js');
+                assets.addCss('/css/product/detail.css')
+            </isscript>
+            //existing content in product.isml
+        </isdecorate>
+    ```
+
+   3.  Test the controller with an existing product:
+    [your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/default/ShowProduct-Start?product=008884303989](http://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/default/ShowProduct-Start?product=008884303989)
+
+
+3. Finding a Decorator used on a page:
+   1. In the Storefront Toolkit, locate the Page Information tool and select it.
+        ![](Screenshot_23.png)
+   2. Mouse over the page to see the templates used to render areas of the page. For example:
+        ![](Screenshot_24.png)
+   3. Click one of the links to navigate to a specific template, i.e. the decorator. Expected result: the decorator file opens in Studio.
+   4. Back in the browser, select the Cache Information tool from the Storefront Toolkit.
+        ![](Screenshot_25.png)
+   5. Inspect the caching used for different templates in the page.
+   6. Click on one of the links to open that file in Studio.
+   7. Click the Esc key to exit the toolkit behavior.
+
+
+
+
+
+
+
+<!-- 
+## Lab6: Reusing Code with a Local Include
+
+It is sometimes very helpful to use existing templates in your template so you don't need to repeat some commonly used parts of isml code. This could be easily done with the help of Local or Remote includes.
+In this lab you need to use local include of producttile template to add some visualization to the product template.
+
+1. Study the template to be Included.
+   1. Locate and study the productTile.isml template (CTRL+SHIFT+R for Eclipse, Ctrl+P for VSC).
+   2. Notice that the first *isset* tag expects pdict.product.
+
+
+2. Using a Local Include
+   1. Open the ShowProduct controller.
+   2. Debug and find name attribute of Product (it shouldn't be equall to null).
+   3. Open the product.isml template. In the template:
+      1. Create a variable that matches the variable and scope expected in the productTile.isml template (it expects pdict.product variable): 
+
+
+
+      ```html
+      <isset name="product" value="${pdict.Product}" scope="pdict"/>
+      ```
+       1. Use a local include to display the product tile below the product name:
+
+        ```javascript
+        <isinclude template="product/producttile"/>
+        ```
+
+        1. Test the controller with an existing product: ...ShowProduct-Start?product=008884303989.
+        2. Commit and Push to new branch feature/WT3.1 , create Pull Request
+
+
+ -->
+
+
 
 ## Lab7: SFRA Forms
 
