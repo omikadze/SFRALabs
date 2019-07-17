@@ -15,7 +15,8 @@
   - [Lab5: Script Debugging](#Lab5-Script-Debugging)
   - [Lab6: Reusing Code with a Decorator](#Lab6-Reusing-Code-with-a-Decorator)
   - [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
-  - [Lab7: SFRA Forms](#Lab7-SFRA-Forms)
+  - [Lab7: Creating Social Networks Links](#Lab7-Creating-Social-Networks-Links)
+  - [Lab8: SFRA Forms](#Lab8-SFRA-Forms)
 
 ## Setting Up and Installing SFRA
 
@@ -63,7 +64,7 @@ After your environment is set up, you can run the SFRA reference application and
 [Watch Video](https://demandwaretraining.docebosaas.com/learn/course/91/Developing%2520with%2520Commerce%2520Cloud%2520Storefront%2520Reference%2520Architecture)
 
 ## Storefront Reference Architecture - Technical Deep Dive:
-[Watch Video](http://salesforce.vidyard.com/watch/ehBFfZBd2PxcbaivjMJHE5)
+[Watch Video](http://salesforce.vidyard.com/watch/ehBFfZBd2PxcbaivjMJHE5)****
 
 
 
@@ -299,10 +300,6 @@ One more good way to reuse existing code is to use decorators. Decorator is an I
 
 
 
-
-
-
-
 <!-- 
 ## Lab6: Reusing Code with a Local Include
 
@@ -336,10 +333,30 @@ In this lab you need to use local include of producttile template to add some vi
 
 
  -->
+## Lab7: Creating Social Networks Links
+
+ In this lab you need to create and add a social networks links to the product template.
 
 
+- app_storefront_base/cartridge/templates/default/product/components/socialIcons.isml
 
-## Lab7: SFRA Forms
+Add this code to the list in the file, go to the browser and check how it works
+
+ ```html
+<li>
+    <a href="https://www.google.com/search?q=${product.productName}" 
+        data-share="google"
+        title="${Resource.msgf('label.social.google', 'product', null, product.productName)}"
+        aria-label="${Resource.msgf('label.social.google', 'product', null, product.productName)}"
+        class="share-icons"
+        target="_blank" >
+        <i class="fa fa-google"></i>
+    </a>
+</li>
+ ```
+
+
+## Lab8: SFRA Forms
 
 **Summary**
 
