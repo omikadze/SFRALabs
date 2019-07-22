@@ -118,7 +118,7 @@ Go to *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-Ref
 
 ## Lab2: Finding an Error on a Controller
 
-If you had any problems in [Lab1](#Lab1-Creating-the-Hello-Controller) you can figure it out in two ways: using the Request Log or the Problem View.
+If you had any problems in [Lab1](#Lab1-Creating-the-Hello-Controller) you can figure it out in two ways: using the Request Log, the Problem View or using DWithEase in your browser we installed before.
 
 **1. Use the Request Log:**
    1. Using the URL you bookmarked, invoke the Hello controller with a missing start node: *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/Hello-Show*
