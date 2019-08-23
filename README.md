@@ -11,13 +11,14 @@
   - [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
   - [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
   - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
-  - [Lab4: Templates](#Lab4-Templates)
-  - [Lab5: Script Debugging](#Lab5-Script-Debugging)
-  - [Lab6: Reusing Code with a Decorator](#Lab6-Reusing-Code-with-a-Decorator)
+  - [Lab4: Controllers extend](#Lab4-Controllers-extend)
+  - [Lab5: Templates](#Lab5-Templates)
+  - [Lab6: Script Debugging](#Lab6-Script-Debugging)
+  - [Lab7: Reusing Code with a Decorator](#Lab7-Reusing-Code-with-a-Decorator)
   - [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
-  - [Lab7: Creating Social Networks Links](#Lab7-Creating-Social-Networks-Links)
-  - [Lab8: Using Page Level Caching](#Lab8-Using-Page-Level-Caching)
-  - [Lab9: SFRA Forms](#Lab9-SFRA-Forms)
+  - [Lab8: Creating Social Networks Links](#Lab8-Creating-Social-Networks-Links)
+  - [Lab9: Using Page Level Caching](#Lab9-Using-Page-Level-Caching)
+  - [Lab10: SFRA Forms](#Lab10-SFRA-Forms)
 
 ## Setting Up and Installing SFRA
 
@@ -91,47 +92,6 @@ server.get('Show', function (req, res, next) {
     }
     res.render('hello/helloTemplate', {testObject: testObject});
     next();
-});
-
-module.exports = server.exports();
-```
-Use the module.superModule mechanism to import the functionality from a controller and then override or add to it.
-
-In this example, the Product.js controller uses the following APIs for customization:
-
-module.superModule: Imports functionality from the first controller with the same name and location found to the right of the current cartridge on the cartridge path.
-
-server.extend: Inherits the existing server object and extends it with a list of new routes from the super module. In this case, it adds the routes from the module.superModule Project.js file.
-
-server.append: Modifies the Show route by appending middleware that adds properties to the viewData object for rendering. Using server.append causes a route to execute both the original middleware chain and any additional steps. If you're interacting with a web service or third-party system, don’t use server.append.
-
-```javascript
-'use strict';
-var server = require('server');
-var page = module.superModule;        //inherits functionality from next Product.js found to the right on the cartridge path
-server.extend(page);                  //extends existing server object with a list of new routes from the Product.js found by module.superModule
-
-
-var ProductMgr = require('dw/catalog/ProductMgr');
-// var app = require()
-
-server.append('Main', function (req, res, next) {
-  var params = req.httpHeaders;
-  var productID;
-
-  if ('x-is-query_string' in params) {
-    productID = params.get('x-is-query_string').split('=')[1];
-  } else {
-    productID = null;
-  }
-
-  var product = ProductMgr.getProduct(productID);
-  if (product) {
-    res.render('productlab4/product', { Product: product });
-  } else {
-    res.render('productlab4/productnf', { Log: 'the product was not found: ' + productID });
-  }
-  next();
 });
 
 module.exports = server.exports();
@@ -261,7 +221,55 @@ module.exports = server.exports();
 
    5. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
 
-## Lab4: Templates
+## Lab4: Controllers extend
+
+
+Use the module.superModule mechanism to import the functionality from a controller and then override or add to it.
+
+In this example, the Product.js controller uses the following APIs for customization:
+
+module.superModule: Imports functionality from the first controller with the same name and location found to the right of the current cartridge on the cartridge path.
+
+server.extend: Inherits the existing server object and extends it with a list of new routes from the super module. In this case, it adds the routes from the module.superModule Project.js file.
+
+server.append: Modifies the Show route by appending middleware that adds properties to the viewData object for rendering. Using server.append causes a route to execute both the original middleware chain and any additional steps. If you're interacting with a web service or third-party system, don’t use server.append.
+
+```javascript
+'use strict';
+var server = require('server');
+var page = module.superModule;        //inherits functionality from next Product.js found to the right on the cartridge path
+server.extend(page);                  //extends existing server object with a list of new routes from the Product.js found by module.superModule
+
+
+var ProductMgr = require('dw/catalog/ProductMgr');
+// var app = require()
+
+server.append('Main', function (req, res, next) {
+  var params = req.httpHeaders;
+  var productID;
+
+  if ('x-is-query_string' in params) {
+    productID = params.get('x-is-query_string').split('=')[1];
+  } else {
+    productID = null;
+  }
+
+  var product = ProductMgr.getProduct(productID);
+  if (product) {
+    res.render('productlab4/product', { Product: product });
+  } else {
+    res.render('productlab4/productnf', { Log: 'the product was not found: ' + productID });
+  }
+  next();
+});
+
+module.exports = server.exports();
+```
+
+
+
+
+## Lab5: Templates
 
 1. Create ISML template lab4/product.isml which shows the name of the Product. For this we use name property of the Product object, passed to the template by the controller:
         ![](Screenshot_16.png)
@@ -283,7 +291,7 @@ module.exports = server.exports();
         ![](Screenshot_22.png)
 5. Commit and Push to new branch, create Pull Request
 
-## Lab5: Script Debugging
+## Lab6: Script Debugging
 
 In this lab we summarize all work done in 4 previous WTs. You need to find in BM some product's ID, to form a proper request string and to debug the execution of the controller for both existing and nonexisting (in the catalog) product ID.
 
@@ -308,7 +316,7 @@ In this lab we summarize all work done in 4 previous WTs. You need to find in BM
 
 
 
-## Lab6: Reusing Code with a Decorator
+## Lab7: Reusing Code with a Decorator
 
 One more good way to reuse existing code is to use decorators. Decorator is an ISML template with which some content could be wrapped. Decorators are typically named with "pt_" prefix. In this WT you need to wrap a template with a decorator, to verify it's work and to find decorators used on the page using Storefront Toolkit.
 
@@ -382,7 +390,7 @@ In this lab you need to use local include of producttile template to add some vi
 
 
  -->
-## Lab7: Creating Social Networks Links
+## Lab8: Creating Social Networks Links
 
  In this lab you need to create and add a social networks links to the product template.
 
@@ -404,7 +412,7 @@ Add this code to the list in the file, go to the browser and check how it works
 </li>
  ```
 
-## Lab8: Using Page Level Caching
+## Lab9: Using Page Level Caching
 
 This walkthrough is about Page Level Caching, here you need to turn on general Caching for RefArch in BM, create a test template with iscache tag and verify if it will work properly on the storefront.
 
@@ -452,7 +460,7 @@ This walkthrough is about Page Level Caching, here you need to turn on general C
 
 
 
-## Lab9: SFRA Forms
+## Lab10: SFRA Forms
 
 **Summary**
 
