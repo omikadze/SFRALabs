@@ -159,14 +159,11 @@ var ProductMgr = require('dw/catalog/ProductMgr');
 server.get('Main', function (req, res, next) {
   var params = req.httpHeaders;
 
-  var productID = params.containsKey('x-is-query_string') ? params.get('x-is-query_string').split('=')[1] : null;
-
-  //Equivalent for previous line
-  // if ('x-is-query_string' in params) {
-  //   productID = params.get('x-is-query_string').split('=')[1];
-  // } else {
-  //   productID = null;
-  // }
+  if ('x-is-query_string' in params) {
+    productID = params.get('x-is-query_string').split('=')[1];
+  } else {
+    productID = null;
+  }
 
   var product = ProductMgr.getProduct(productID);
 
