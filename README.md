@@ -297,7 +297,7 @@ module.exports = server.exports();
     ```
 3. Request the ShowProduct-Start controller appending a URL query string containing the product id: ShowProduct-Start?product=54399.
 4. Debug and verify.
-        ![](Screenshot_22.png)
+        ![](Screenshot_27.png)
 5. Commit and Push to new branch, create Pull Request
 
 ## Lab6: Script Debugging
