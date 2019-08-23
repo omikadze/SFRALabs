@@ -100,10 +100,10 @@ Navigate to *your_cartridge_name/cartridge/templates/dafault/hello* folder and c
 ```html
 <html>
     <head>
-        <title>Hello</title>
+        <title>${ Resource.msg('title') }</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>${ Resource.msg('helloworld') }</h1>
     </body>
 </html>
 ```
