@@ -84,7 +84,12 @@ var server = require('server');
 
 
 server.get('Show', function (req, res, next) {
-    res.render('hello/helloTemplate');
+    var testObject = {
+        name: 'testname',
+        email: 'testemail@astoundcommerce.com',
+        type: 'object'
+    }
+    res.render('hello/helloTemplate', {testObject: testObject});
     next();
 });
 
@@ -141,12 +146,15 @@ Navigate to *your_cartridge_name/cartridge/templates/dafault/hello* folder and c
 - *your_cartridge_name/cartridge/templates/dafault/hello/helloTemplate*
 
 ```html
+
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
 <html>
     <head>
         <title>${ Resource.msg('title') }</title>
     </head>
     <body>
-        <h1>${ Resource.msg('helloworld') }</h1>
+        <span> ${JSON.stringify(pdict.testObject)} </span>
     </body>
 </html>
 ```
