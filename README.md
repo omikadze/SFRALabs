@@ -272,7 +272,16 @@ module.exports = server.exports();
 ## Lab5: Templates
 
 1. Create ISML template lab4/product.isml which shows the name of the Product. For this we use name property of the Product object, passed to the template by the controller:
-        ![](Screenshot_16.png)
+      ```javascript
+    <html>
+        <head>
+            <title>Hello</title>
+        </head>
+        <body>
+            <h1>${JSON.stringify(pdict.Product)}</h1>
+        </body>
+    </html>
+    ```
 
 2. Create ISML template lab4/productnotfound.isml with some simple text describing that the system can't find such product.
 
