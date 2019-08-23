@@ -90,6 +90,49 @@ server.get('Show', function (req, res, next) {
 
 module.exports = server.exports();
 ```
+Use the module.superModule mechanism to import the functionality from a controller and then override or add to it.
+
+In this example, the Product.js controller uses the following APIs for customization:
+
+module.superModule: Imports functionality from the first controller with the same name and location found to the right of the current cartridge on the cartridge path.
+
+server.extend: Inherits the existing server object and extends it with a list of new routes from the super module. In this case, it adds the routes from the module.superModule Project.js file.
+
+server.append: Modifies the Show route by appending middleware that adds properties to the viewData object for rendering. Using server.append causes a route to execute both the original middleware chain and any additional steps. If you're interacting with a web service or third-party system, don’t use server.append.
+
+```javascript
+'use strict';
+var server = require('server');
+var page = module.superModule;        //inherits functionality from next Product.js found to the right on the cartridge path
+server.extend(page);                  //extends existing server object with a list of new routes from the Product.js found by module.superModule
+
+
+var ProductMgr = require('dw/catalog/ProductMgr');
+// var app = require()
+
+server.append('Main', function (req, res, next) {
+  var params = req.httpHeaders;
+  var productID;
+
+  if ('x-is-query_string' in params) {
+    productID = params.get('x-is-query_string').split('=')[1];
+  } else {
+    productID = null;
+  }
+
+  var product = ProductMgr.getProduct(productID);
+  if (product) {
+    res.render('productlab4/product', { Product: product });
+  } else {
+    res.render('productlab4/productnf', { Log: 'the product was not found: ' + productID });
+  }
+  next();
+});
+
+module.exports = server.exports();
+```
+
+
 
 **2. Create template helloTemplate.isml**
 
