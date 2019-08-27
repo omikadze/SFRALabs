@@ -16,6 +16,7 @@
   - [Lab6: Script Debugging](#Lab6-Script-Debugging)
   - [Lab7: Reusing Code with a Decorator](#Lab7-Reusing-Code-with-a-Decorator)
   - [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
+  - [Lab8: Middleware](#Lab8-Middleware)
   - [Lab8: Creating Social Networks Links](#Lab8-Creating-Social-Networks-Links)
   - [Lab9: Using Page Level Caching](#Lab9-Using-Page-Level-Caching)
   - [Lab10: SFRA Forms](#Lab10-SFRA-Forms)
@@ -403,6 +404,81 @@ In this lab you need to use local include of producttile template to add some vi
 
 
  -->
+
+
+
+## Lab8: Middleware
+
+Middleware
+Each step of a middleware chain is a function that takes three arguments: req, res, and next, in that order.
+
+req
+
+This argument is short for Request. It contains information about the server request that initiated execution. The req object contains user input information, such as the content-type that the user accepts, the user's login and locale information, or session information. The req argument parses query string parameters and assigns them to the req.querystring object.
+
+res
+
+This argument is short for Response. It contains functionality for outputting data back to the client. For example:
+
+- res.cacheExpiration(24): Sets cache expiration to 24 hours from now.
+- res.render(templateName, data): Outputs an ISML template back to the client and assigns data to pdict.
+- res.json(data): Prints a JSON object back to the screen. It's helpful in creating AJAX service endpoints that you want to execute from the client-side scripts.
+- res.setViewData(data): Doesn't render anything, but sets the output object. This behavior can be helpful if you want to add multiple objects to the pdict of the template. The pdict contains the information for rendering that is passed to the template. setViewData merges all the data that you passed into a single object, so you can call it at every step of the middleware chain. For example, you can create a separate middleware function that retrieves information about a user's locale to render a language switch on the page. The output object of the ISML template or JSON is set after every step of the middleware chain is complete.
+
+You can also use the ViewData object to extend the data created in a controller that you are extending. You don't have to duplicate the logic used in the original controller to get the data. You only have to add the additional data to the ViewData object and render it.
+
+next()
+
+Executing the next function notifies the server that you are done with a middleware step so that it can execute the next step in the chain.
+
+By chaining multiple middleware functions, you can compartmentalize your code and extend or modify routes without having to rewrite them.
+
+
+You can enhance this code by adding the server.middleware.https parameter after Show, to limit this route to only allow HTTPS requests. This example restricts the Account-Show route to HTTPS.
+
+```javascript
+
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var cache = require('*/cartridge/scripts/middleware/cache');
+
+server.get('Show', cache.applyDefaultCache, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+
+```
+
+
+This example shows a main function that conditionally executes next()or next(new Error()) depending on whether an Apple Pay order is being placed.
+
+```javascript
+server.post('Submit', function (req, res, next) {
+    var order = OrderMgr.getOrder(req.querystring.order_id);
+
+    if (!order && req.querystring.order_token !== order.getOrderToken()) {
+        return next(new Error('Order token does not match'));
+    }
+
+    var orderPlacementStatus = orderHelpers.placeOrder(order);
+
+    if (orderPlacementStatus.error) {
+        return next(new Error('Could not place order'));
+    }
+
+    var orderModel = orderHelpers.buildOrderModel(order);
+    res.render('checkout/confirmation/confirmation', { order: orderModel });
+    return next();
+});
+```
+
+The code executed between the first and last parameter is referred to as middleware and the entire process is called chaining. You can create middleware functions to limit route access, add information to the data object passed to the template for rendering, or for any other purpose. One limitation to this approach is that you must call the next function at the end of every step in the chain. Otherwise, the next function in the chain is not executed.
+
+
+
 ## Lab8: Creating Social Networks Links
 
  In this lab you need to create and add a social networks links to the product template.
@@ -461,16 +537,6 @@ This walkthrough is about Page Level Caching, here you need to turn on general C
    ```
    2. Call Caching-Start multiple times: Result: the time does not change.
 6. Commit and Push to new branch, create Pull Request
-
-
-
-
-
-
-
-
-
-
 
 
 ## Lab10: SFRA Forms
