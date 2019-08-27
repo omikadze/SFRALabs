@@ -620,7 +620,7 @@ module.exports = server.exports();
 
 ```
 
-3. 
+3.  
 
 
 ## Lab9: Creating Social Networks Links
