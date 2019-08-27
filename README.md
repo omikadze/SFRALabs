@@ -752,6 +752,67 @@ server.get('Show', userLoggedIn.validateLoggedInAjax, server.middleware.https, f
 module.exports = server.exports();
 ```
 
+6. csrf
+
+6.1 validateRequest - Middleware validating CSRF token
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var csrf = require('*/cartridge/scripts/middleware/csrf');
+
+server.get('Show', csrf.validateRequest, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+6.2 validateAjaxRequest - Middleware validating CSRF token from ajax request
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var csrf = require('*/cartridge/scripts/middleware/csrf');
+
+server.get('Show', csrf.validateAjaxRequest, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+6.3 generateToken - Middleware generating a csrf token and setting the view data
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var csrf = require('*/cartridge/scripts/middleware/csrf');
+
+server.get('Show', csrf.generateToken, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+```html
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<html>
+    <head>
+        <title>${ Resource.msg('Home') }</title>
+    </head>
+    <body>
+        <span> ${pdict.csrf.tokenName }</span>
+        <span> ${pdict.csrf.token }</span>
+       
+    </body>
+</html>
+```
+
 ## Lab9: Creating Social Networks Links
 
  In this lab you need to create and add a social networks links to the product template.
