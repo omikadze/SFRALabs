@@ -412,12 +412,10 @@ In this lab you need to use local include of producttile template to add some vi
 
 Each step of a middleware chain is a function that takes three arguments: req, res, and next, in that order.
 
-req
-
+**req**
 This argument is short for Request. It contains information about the server request that initiated execution. The req object contains user input information, such as the content-type that the user accepts, the user's login and locale information, or session information. The req argument parses query string parameters and assigns them to the req.querystring object.
 
-res
-
+**res**
 This argument is short for Response. It contains functionality for outputting data back to the client. For example:
 
 - res.cacheExpiration(24): Sets cache expiration to 24 hours from now.
@@ -427,14 +425,12 @@ This argument is short for Response. It contains functionality for outputting da
 
 You can also use the ViewData object to extend the data created in a controller that you are extending. You don't have to duplicate the logic used in the original controller to get the data. You only have to add the additional data to the ViewData object and render it.
 
-next()
-
+**next()**
 Executing the next function notifies the server that you are done with a middleware step so that it can execute the next step in the chain.
 
 By chaining multiple middleware functions, you can compartmentalize your code and extend or modify routes without having to rewrite them.
 
-Example 1: Conditionally Executing a Middleware Step
-
+**Example 1: Conditionally Executing a Middleware Step**
 This example shows a main function that conditionally executes next()or next(new Error()) depending on whether an Apple Pay order is being placed.
 ```javascript
 server.post('Submit', function (req, res, next) {
@@ -459,8 +455,7 @@ server.post('Submit', function (req, res, next) {
 The code executed between the first and last parameter is referred to as middleware and the entire process is called chaining. You can create middleware functions to limit route access, add information to the data object passed to the template for rendering, or for any other purpose. One limitation to this approach is that you must call the next function at the end of every step in the chain. Otherwise, the next function in the chain is not executed.
 
 
-Event Emitters
-
+**Event Emitters**
 The server module emits events at every step of execution and you can subscribe and unsubscribe to events from a given route. Use an event emitter to override the middleware chain by removing the event listener and creating a new one. However, if you have to change individual steps in a middleware chain, we recommend that you replace a route. While SFRA does supply removeListener and removeAllListener functions, they don't recognize named event emitters. For this reason, it isn't possible to use Step event emitters to override a specific step in the middleware chain.
 
 The following is a list of currently supported events:
@@ -474,34 +469,28 @@ All events provide both req and res as parameters to all handlers.
 
 Subscribing or unsubscribing to an event lets you do complex and interesting things. For example, the server subscribes to the route:Complete event to render ISML back to the client. If you want to use something other than ISML to render the content of your template, you can unsubscribe from the route:Complete event. You can subscribe to it again with a function that uses your own rendering engine instead of ISML, without modifying any of the existing controllers.
 
-OnRequest and OnSession Event Handlers
-
+**OnRequest and OnSession Event Handlers**
 The OnRequest and OnSession event handlers that were implemented as pipelines in SiteGenesis Pipeline Processor (SGPP) and as controllers in SGJC are not used in SFRA. You still have access to request and session data using the middleware req (request) and res (response) objects. However, SFRA avoids using OnRequest and OnSession anywhere in our code outside of the server module.
 
 If you want to implement OnRequest and OnSession, they must be implemented through hooks. B2C Commerce looks for OnSession as the controller name, but the new architecture doesn't do that. The only difference between a hook and controller is that the hook doesn't have access to the req and res objects.
 
 
-Inheriting Functionality from Another Controller and Extending It
-
+**Inheriting Functionality from Another Controller and Extending It**
 It's important to understand when to extend a controller and when to override it, because this decision can significantly impact functionality and performance.
 
-When do I want to Override?
-
+**When do I want to Override?**
 It's best to override if you want to avoid executing the middleware of the controller or script you're modifying.
 
 When extending a controller, you first execute the original middleware, and then execute the additional steps included in your extension. If the original middleware steps include interaction with a third-party system, that interaction is still executed. If your extension also includes the interaction, the interaction is executed twice. Similarly, if the original middleware includes one or more steps that are computationally expensive, you can avoid executing the original middleware.
 
-When do I want to Extend?
-
+**When do I want to Extend?**
 If the middleware you want to override is looking up a string or performing inexpensive operations, you can extend the controller or module.
 
-How do I extend or Override?
-
+**How do I extend or Override?**
 Use the module.superModule mechanism to import the functionality from a controller and then override or add to it.
 
 
-Example: Adding Product Reviews to Product.Js
-
+**Example: Adding Product Reviews to Product.Js**
 This example customizes the product detail page to include product review information. The code for this example is available in the Plugin_reviews demo cartridge.
 
 In this example, the Product.js controller uses the following APIs for customization:
@@ -545,11 +534,10 @@ module.exports = server.exports();
 ```
 
 
-Replacing or Adding a Route
+**Replacing or Adding a Route**
 If you want to completely replace a route, rather than append it, use module.superModule to inherit the functionality of the controller and route you want to replace. Then register the functions you want the route to use.
 
-Example: replacing the Product-Varation route
-
+**Example: replacing the Product-Varation route**
 In your custom cartridge, create a Product.js file in the same location as the Product.js file in the base cartridge. Use the following code to import the functionality of Product.js and redefine it.
 
 ```javascript
@@ -566,23 +554,23 @@ server.replace('Show', server.middleware.get, function(req, res, next){
 ```
 
 
-Overriding Instead of Replacing a Step in the Middleware Chain
-
+**Overriding Instead of Replacing a Step in the Middleware Chain**
 You can use the middleware functions provided by Commerce Cloud or create your own. We recommend that you replace a route when changing access.
 
 These middleware filtering functions are provided by Commerce Cloud:
 
-get: Filter for get requests
-htt: Filter for http requests
-https: Filter for https requests
-include: Filter for remote includes
-post: Filter for post requests
+ - get: Filter for get requests
+ - htt: Filter for http requests
+ - https: Filter for https requests
+ - include: Filter for remote includes
+ - post: Filter for post requests
+
 If the request doesn't match the filtering condition, the function returns an Error with the text Params do not match route.
 
 
-Discovering deeply '*cartridge/scripts/middleware'
+**Discovering deeply '*cartridge/scripts/middleware'**
 
-1. https access
+**1. https access**
    
 You can enhance this code by adding the server.middleware.https parameter after Show, to limit this route to only allow HTTPS requests. This example restricts the Account-Show route to HTTPS.
 
@@ -599,10 +587,9 @@ server.get('Show', server.middleware.https, function (req, res, next) {  //regis
 });
 
 module.exports = server.exports();
-
 ```
-2. cache
 
+**2. cache**
 
 2.1 cache.applyDefaultCache - Applies the default expiration value for the page cache.
 ```javascript
@@ -669,7 +656,7 @@ module.exports = server.exports();
 ```
 
 
-1.  
+3.  
 
 
 ## Lab9: Creating Social Networks Links
