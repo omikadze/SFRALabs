@@ -669,7 +669,6 @@ server.get('Show', cache.applyInventorySensitiveCache, server.middleware.https, 
 module.exports = server.exports();
 ```
 
-
 3. consentTracking
 
 Middleware to use consent tracking check
@@ -688,6 +687,37 @@ server.get('Show', consentTracking.consent, server.middleware.https, function (r
 module.exports = server.exports();
 ```
 
+4. pageMetaData - Middleware to compute request pageMetaData object
+
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
+
+server.get('Show', pageMetaData.computedPageMetaData, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+```html
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<html>
+    <head>
+        <title>${ Resource.msg('Home') }</title>
+    </head>
+    <body>
+        <span> ${pdict.CurrentPageMetaData.title }</span>
+        <span> ${pdict.CurrentPageMetaData.description }</span>
+        <span> ${pdict.CurrentPageMetaData.keywords }</span>
+        <span> ${pdict.CurrentPageMetaData.pageMetaTags }</span>
+    </body>
+</html>
+```
 
 ## Lab9: Creating Social Networks Links
 
