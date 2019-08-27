@@ -719,6 +719,39 @@ module.exports = server.exports();
 </html>
 ```
 
+5. userLoggedIn 
+
+5.1 validateLoggedIn - Middleware validating if user logged in
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
+
+server.get('Show', userLoggedIn.validateLoggedIn, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+5.2 validateLoggedInAjax - Middleware validating if user logged in from ajax request
+
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
+
+server.get('Show', userLoggedIn.validateLoggedInAjax, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
 ## Lab9: Creating Social Networks Links
 
  In this lab you need to create and add a social networks links to the product template.
