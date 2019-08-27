@@ -17,9 +17,9 @@
   - [Lab7: Reusing Code with a Decorator](#Lab7-Reusing-Code-with-a-Decorator)
   - [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
   - [Lab8: Middleware](#Lab8-Middleware)
-  - [Lab8: Creating Social Networks Links](#Lab8-Creating-Social-Networks-Links)
-  - [Lab9: Using Page Level Caching](#Lab9-Using-Page-Level-Caching)
-  - [Lab10: SFRA Forms](#Lab10-SFRA-Forms)
+  - [Lab9: Creating Social Networks Links](#Lab9-Creating-Social-Networks-Links)
+  - [Lab10: Using Page Level Caching](#Lab10-Using-Page-Level-Caching)
+  - [Lab11: SFRA Forms](#Lab11-SFRA-Forms)
 
 ## Setting Up and Installing SFRA
 
@@ -479,7 +479,7 @@ The code executed between the first and last parameter is referred to as middlew
 
 
 
-## Lab8: Creating Social Networks Links
+## Lab9: Creating Social Networks Links
 
  In this lab you need to create and add a social networks links to the product template.
 
@@ -501,7 +501,7 @@ Add this code to the list in the file, go to the browser and check how it works
 </li>
  ```
 
-## Lab9: Using Page Level Caching
+## Lab10: Using Page Level Caching
 
 This walkthrough is about Page Level Caching, here you need to turn on general Caching for RefArch in BM, create a test template with iscache tag and verify if it will work properly on the storefront.
 
@@ -539,7 +539,7 @@ This walkthrough is about Page Level Caching, here you need to turn on general C
 6. Commit and Push to new branch, create Pull Request
 
 
-## Lab10: SFRA Forms
+## Lab11: SFRA Forms
 
 **Summary**
 
