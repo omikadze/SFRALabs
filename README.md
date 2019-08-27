@@ -234,33 +234,37 @@ server.extend: Inherits the existing server object and extends it with a list of
 
 server.append: Modifies the Show route by appending middleware that adds properties to the viewData object for rendering. Using server.append causes a route to execute both the original middleware chain and any additional steps. If you're interacting with a web service or third-party system, don’t use server.append.
 
+res.getViewData: Gets the current viewData object from the response object.
+
+res.setViewData: Updates the viewData object used for rendering the template. Create your customized template in the same location and with the same name as the template rendered by the superModule controller. For example, if this controller inherits functionality from app_storefront_base, the rendering template depends on the product type being rendered. The rendering template can be either product/productDetails, product/bundleDetails, or product/setDetails.
+
 ```javascript
+// Product.js
+
 'use strict';
+
 var server = require('server');
 var page = module.superModule;        //inherits functionality from next Product.js found to the right on the cartridge path
 server.extend(page);                  //extends existing server object with a list of new routes from the Product.js found by module.superModule
 
+server.append('Show', function (req, res, next) { //adds additional middleware
+    var viewData = res.getViewData();
+    viewData.product.reviews = [{
+        text: 'Lorem ipsum dolor sit amet, cibo utroque ne vis, has no sumo graece.' +
+          ' Dicta persius his id. Ea maluisset scripserit contentiones quo, est ne movet dicam.' +
+          ' Equidem scriptorem vis no. Civibus tacimates interpretaris has et,' +
+          ' ei offendit ocurreret vis, eos purto pertinax eleifend ea.',
+        rating: 3.5
+    }, {
+        text: 'Very short review',
+        rating: 5
+    }, {
+        text: 'Lorem ipsum dolor sit amet, cibo utroque ne vis, has no sumo graece.',
+        rating: 1.5
+    }];
 
-var ProductMgr = require('dw/catalog/ProductMgr');
-// var app = require()
-
-server.append('Main', function (req, res, next) {
-  var params = req.httpHeaders;
-  var productID;
-
-  if ('x-is-query_string' in params) {
-    productID = params.get('x-is-query_string').split('=')[1];
-  } else {
-    productID = null;
-  }
-
-  var product = ProductMgr.getProduct(productID);
-  if (product) {
-    res.render('productlab4/product', { Product: product });
-  } else {
-    res.render('productlab4/productnf', { Log: 'the product was not found: ' + productID });
-  }
-  next();
+    res.setViewData(viewData);
+    next();
 });
 
 module.exports = server.exports();
@@ -275,7 +279,7 @@ module.exports = server.exports();
       ```javascript
     <html>
         <head>
-            <title>Hello</title>
+            <title>${ Resource.msg('Hello') }</title>
         </head>
         <body>
             <h1>${JSON.stringify(pdict.Product)}</h1>
@@ -288,7 +292,7 @@ module.exports = server.exports();
     ```javascript
     <html>
         <head>
-            <title>Hello</title>
+            <title>${ Resource.msg('Hello') }</title>
         </head>
         <body>
             <h1>${pdict.Log}</h1>
@@ -647,10 +651,10 @@ After a form is submitted, data from the form is available as part of the **req.
         var comment = req.form.comment;
 
         res.render('custom/customPageResult', {
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        comment: comment
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            comment: comment
         });
 
         next();
