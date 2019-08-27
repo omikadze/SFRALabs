@@ -409,7 +409,7 @@ In this lab you need to use local include of producttile template to add some vi
 
 ## Lab8: Middleware
 
-Middleware
+
 Each step of a middleware chain is a function that takes three arguments: req, res, and next, in that order.
 
 req
@@ -433,9 +433,9 @@ Executing the next function notifies the server that you are done with a middlew
 
 By chaining multiple middleware functions, you can compartmentalize your code and extend or modify routes without having to rewrite them.
 
+Example 1: Conditionally Executing a Middleware Step
 
 This example shows a main function that conditionally executes next()or next(new Error()) depending on whether an Apple Pay order is being placed.
-
 ```javascript
 server.post('Submit', function (req, res, next) {
     var order = OrderMgr.getOrder(req.querystring.order_id);
@@ -604,6 +604,7 @@ module.exports = server.exports();
 2. cache
 
 
+2.1 cache.applyDefaultCache - Applies the default expiration value for the page cache.
 ```javascript
 
 'use strict';
@@ -617,10 +618,58 @@ server.get('Show', cache.applyDefaultCache, server.middleware.https, function (r
 });
 
 module.exports = server.exports();
-
 ```
 
-3.  
+2.2 cache.applyPromotionSensitiveCache - Applies the default price promotion page cache.
+```javascript
+
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var cache = require('*/cartridge/scripts/middleware/cache');
+
+server.get('Show', cache.applyPromotionSensitiveCache, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+2.3 cache.applyShortPromotionSensitiveCache - Applies the default price promotion page cache.
+```javascript
+
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var cache = require('*/cartridge/scripts/middleware/cache');
+
+server.get('Show', cache.applyShortPromotionSensitiveCache, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+2.4 cache.applyInventorySensitiveCache -  Applies the inventory sensitive page cache.
+```javascript
+
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var cache = require('*/cartridge/scripts/middleware/cache');
+
+server.get('Show', cache.applyInventorySensitiveCache, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
+
+
+1.  
 
 
 ## Lab9: Creating Social Networks Links
