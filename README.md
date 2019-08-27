@@ -582,7 +582,7 @@ These middleware filtering functions are provided by Commerce Cloud:
 If the request doesn't match the filtering condition, the function returns an Error with the text Params do not match route.
 
 
-**Discovering deeply '*cartridge/scripts/middleware'**
+**Discovering deeply 'cartridge/scripts/middleware'**
 
 **1. https access**
    
