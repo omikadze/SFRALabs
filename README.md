@@ -670,7 +670,23 @@ module.exports = server.exports();
 ```
 
 
-3.  
+3. consentTracking
+
+Middleware to use consent tracking check
+
+```javascript
+'use strict';
+
+var server = require('server');    //the server module is used by all controllers
+var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
+
+server.get('Show', consentTracking.consent, server.middleware.https, function (req, res, next) {  //registers the Show route for the Home module
+    res.render('/home/homepage');      //renders the hompage template
+    next();            //notifies middleware chain that it can move to the next step or terminate if this is the last step.
+});
+
+module.exports = server.exports();
+```
 
 
 ## Lab9: Creating Social Networks Links
