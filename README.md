@@ -21,6 +21,8 @@
   - [Lab10: Creating Social Networks Links](#Lab10-Creating-Social-Networks-Links)
   - [Lab11: Using Page Level Caching](#Lab11-Using-Page-Level-Caching)
   - [Lab12: SFRA Forms](#Lab12-SFRA-Forms)
+  - [Lab13: ClickStream](#Lab13-ClickStream)
+
 
 ## Setting Up and Installing SFRA
 
@@ -1399,4 +1401,4 @@ This template prints the form field label and data stored from the form.
     This class does not have a constructor, so you cannot create it directly.
 
 
-![](image_2019-11-11_15-21-21.png)
+    ![](./image_2019-11-11_15-21-21.png)
