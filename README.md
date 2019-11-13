@@ -22,6 +22,7 @@
   - [Lab11: Using Page Level Caching](#Lab11-Using-Page-Level-Caching)
   - [Lab12: SFRA Forms](#Lab12-SFRA-Forms)
   - [Lab13: ClickStream](#Lab13-ClickStream)
+- [Lab14: server.replace](#Lab14-serverreplace)
 
 
 ## Setting Up and Installing SFRA
@@ -1404,3 +1405,15 @@ This template prints the form field label and data stored from the form.
 ![](image_2019-11-11_15-21-21.png)
 
 ![](Screenshot_30.png)
+
+
+
+# Lab14: server.replace
+
+    If you want to completely replace a route, rather than append it, use module.superModule to inherit the functionality of the controller and route you want to replace. Then register the functions you want the route to use.
+
+    Example: replacing the Product-Varation route
+
+    In your custom cartridge, create a Product.js file in the same location as the Product.js file in the base cartridge. Use the following code to import the functionality of Product.js and redefine it.
+    
+![](Screenshot_29.png)
