@@ -48,6 +48,9 @@ Install VS Code and add this [extension](https://marketplace.visualstudio.com/it
 8. Search for the following repositories, and click Clone or download to copy each repository to your local system.
 9. Download SFRA base structure from [github](https://github.com/SalesforceCommerceCloud/storefront-reference-architecture)
 10. Import [data](https://github.com/SalesforceCommerceCloud/storefrontdata) to your instance 
+11. Install and configure SFRA [Tools](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_installing_and_configuring_sfra_build_tools.html?cp=0_5_3_2_1)
+12. [Build](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_building_sfra.html?cp=0_5_3_2_2) the site 
+13. [Upload](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_uploading_code.html?cp=0_5_3_2_3) code to the sandbox
 
 After your environment is set up, you can run the SFRA reference application and explore how it is constructed.
 
