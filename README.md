@@ -50,8 +50,8 @@ After your environment is set up, you can run the SFRA reference application and
 
 ## Configure DwithEasy Extension for Chrome
 
-1. Follow this [link](https://forkpoint.com/products/dwithease/) and click "ADD TO GOOGLE CHROME" button to install extension.
-2. ![](./Screenshot_5.png)
+1. Follow this [link](https://forkpoint.com/products/dwithease/) and click "ADD TO GOOGLE CHROME" button to install extension. ![](./Screenshot_32.png)
+2. In the chrome web store click "Add to Chrome" button ![](./Screenshot_5.png)
 3. ![](./Screenshot_6.png)
 4. ![](./Screenshot_7.png)
 5. Fill the form and click Save
