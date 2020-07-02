@@ -1,7 +1,6 @@
 # SFRA Labs
 
-**Table of context:**
-- [SFRA Labs](#SFRA-Labs)
+**Table of context (SFRA Labs):**
   - [Setting Up and Installing SFRA](#Setting-Up-and-Installing-SFRA)
   - [Configure DwithEasy Extension for Chrome](#Configure-DwithEasy-Extension-for-Chrome)
   - [Storefront Reference Architecture - SFRA](#Storefront-Reference-Architecture---SFRA)
@@ -22,7 +21,7 @@
   - [Lab11: Using Page Level Caching](#Lab11-Using-Page-Level-Caching)
   - [Lab12: SFRA Forms](#Lab12-SFRA-Forms)
   - [Lab13: ClickStream](#Lab13-ClickStream)
-- [Lab14: server.replace](#Lab14-serverreplace)
+  - [Lab14: server.replace](#Lab14-serverreplace)
 
 
 ## Setting Up and Installing SFRA
@@ -38,14 +37,19 @@ The SFRA reference application represents Commerce Cloud's current recommended a
 
 To get started with SFRA, you have to perform some preliminary steps:
 
-- [Obtain a GitHub account if you don't already have one](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSFRA%2FSFRASetup.html)
-- [Build SFRA and push the code to the server](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSFRA%2FBuildingSFRA.html)
-- [Uploading Code for SFRA](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=/com.demandware.dochelp/SFRA/ConfiguringSFRA.html)
-- [Configure SFRA for your instance so that you can see products and catalogs on the sample storefront](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSFRA%2FConfiguringSFRA.html)
-
+1. Set up your environment in VS CODE. 
+Install VS Code and add this [extension](https://marketplace.visualstudio.com/items?itemName=SqrTT.prophet) for uploading cartridges to your instance.
+2. If you don’t already have a GitHub account, create one on [Github](https://github.com/) 
+3. [Enable](https://docs.github.com/en/github/authenticating-to-github/configuring-two-factor-authentication) Two-Factor Authentication for your GitHub account
+4. Navigate to the XChange User Community [Profile](https://cc-community-authmgr.herokuapp.com/), and log in with Account Manager credentials. If you have an active session on XChange, you might be logged in automatically.
+5. On the left side, select Github. Follow the steps on the screen to authenticate, link your GitHub account, and request access.
+6. At the bottom, click Visit Commerce Cloud on Github.
+7. At the top, click View Invitation. Accept the invitation. You now have access to the Salesforce CommerceCloud repositories on GitHub.
+8. Search for the following repositories, and click Clone or download to copy each repository to your local system.
+9. Download SFRA base structure from [github](https://github.com/SalesforceCommerceCloud/storefront-reference-architecture)
+10. Import [data](https://github.com/SalesforceCommerceCloud/storefrontdata) to your instance 
 
 After your environment is set up, you can run the SFRA reference application and explore how it is constructed.
-
 
 
 ## Configure DwithEasy Extension for Chrome
