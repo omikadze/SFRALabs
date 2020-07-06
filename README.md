@@ -24,6 +24,21 @@
   - [Lab14: server.replace](#Lab14-serverreplace)
 
 
+## Storefront Reference Architecture - SFRA
+[Learn more](https://confluence.ontrq.com/display/ACDC/Storefront+Reference+Architecture+-+SFRA)
+
+## Global Development Strategy for SFRA Projects - WIP
+
+[Learn more](https://confluence.ontrq.com/pages/viewpage.action?spaceKey=ACDC&title=Global+Development+Strategy+for+SFRA+Projects+-+WIP#GlobalDevelopmentStrategyforSFRAProjects-WIP-res)
+
+## Developing with Commerce Cloud Storefront Reference Architecture
+
+[Watch Video](https://demandwaretraining.docebosaas.com/learn/course/91/Developing%2520with%2520Commerce%2520Cloud%2520Storefront%2520Reference%2520Architecture)
+
+## Storefront Reference Architecture - Technical Deep Dive:
+[Watch Video](http://salesforce.vidyard.com/watch/ehBFfZBd2PxcbaivjMJHE5)****
+
+
 ## Setting Up and Installing SFRA
 
 The SFRA (Storefront Reference Architecture) reference application provides two sample sites:
@@ -66,21 +81,6 @@ After your environment is set up, you can run the SFRA reference application and
 5. Fill the form and click Save
    ![](./Screenshot_8.png)
 6. Now you can navigate to your Chrome extnesions, find the DWithEasy logo and work with your sandbox.
-
-
-## Storefront Reference Architecture - SFRA
-[Learn more](https://confluence.ontrq.com/display/ACDC/Storefront+Reference+Architecture+-+SFRA)
-
-## Global Development Strategy for SFRA Projects - WIP
-
-[Learn more](https://confluence.ontrq.com/pages/viewpage.action?spaceKey=ACDC&title=Global+Development+Strategy+for+SFRA+Projects+-+WIP#GlobalDevelopmentStrategyforSFRAProjects-WIP-res)
-
-## Developing with Commerce Cloud Storefront Reference Architecture
-
-[Watch Video](https://demandwaretraining.docebosaas.com/learn/course/91/Developing%2520with%2520Commerce%2520Cloud%2520Storefront%2520Reference%2520Architecture)
-
-## Storefront Reference Architecture - Technical Deep Dive:
-[Watch Video](http://salesforce.vidyard.com/watch/ehBFfZBd2PxcbaivjMJHE5)****
 
 
 
