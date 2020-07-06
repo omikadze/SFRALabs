@@ -51,6 +51,8 @@ Install VS Code and add this [extension](https://marketplace.visualstudio.com/it
 11. Install and configure SFRA [Tools](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_installing_and_configuring_sfra_build_tools.html?cp=0_5_3_2_1)
 12. [Build](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_building_sfra.html?cp=0_5_3_2_2) the site 
 13. [Upload](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_uploading_code.html?cp=0_5_3_2_3) code to the sandbox
+14. [Configure](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_configuring_sfra.html?cp=0_5_3_3) the site.
+15. [Customizing](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_customizing_sfra.html?cp=0_5_3_4) SFRA 
 
 After your environment is set up, you can run the SFRA reference application and explore how it is constructed.
 
