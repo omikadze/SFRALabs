@@ -1,26 +1,27 @@
 # SFRA Labs
 
 **Table of context (SFRA Labs):**
-- [Storefront Reference Architecture - SFRA](#Storefront-Reference-Architecture---SFRA)
-- [Global Development Strategy for SFRA Projects - WIP](#Global-Development-Strategy-for-SFRA-Projects---WIP)
-- [Developing with Commerce Cloud Storefront Reference Architecture](#Developing-with-Commerce-Cloud-Storefront-Reference-Architecture)
-- [Storefront Reference Architecture - Technical Deep Dive:](#Storefront-Reference-Architecture---Technical-Deep-Dive)
-- [Setting Up and Installing SFRA](#Setting-Up-and-Installing-SFRA)
-- [Configure DwithEasy Extension for Chrome](#Configure-DwithEasy-Extension-for-Chrome)
-- [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
-- [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
-- [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
-- [Lab4: Controllers extend](#Lab4-Controllers-extend)
-- [Lab5: Templates](#Lab5-Templates)
-- [Lab6: Script Debugging](#Lab6-Script-Debugging)
-- [Lab7: Reusing Code with a Decorator](#Lab7-Reusing-Code-with-a-Decorator)
-- [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
-- [Lab8: Middleware](#Lab8-Middleware)
-- [Lab9: Models and js decorators](#Lab9-Models-and-js-decorators)
-- [Lab10: Creating Social Networks Links](#Lab10-Creating-Social-Networks-Links)
-- [Lab11: Using Page Level Caching](#Lab11-Using-Page-Level-Caching)
-- [Lab12: SFRA Forms](#Lab12-SFRA-Forms)
-- [Lab13: ClickStream](#Lab13-ClickStream)
+- [SFRA Labs](#SFRA-Labs)
+  - [Storefront Reference Architecture - SFRA](#Storefront-Reference-Architecture---SFRA)
+  - [Global Development Strategy for SFRA Projects - WIP](#Global-Development-Strategy-for-SFRA-Projects---WIP)
+  - [Developing with Commerce Cloud Storefront Reference Architecture](#Developing-with-Commerce-Cloud-Storefront-Reference-Architecture)
+  - [Storefront Reference Architecture - Technical Deep Dive:](#Storefront-Reference-Architecture---Technical-Deep-Dive)
+  - [Setting Up and Installing SFRA](#Setting-Up-and-Installing-SFRA)
+  - [Configure DwithEasy Extension for Chrome](#Configure-DwithEasy-Extension-for-Chrome)
+  - [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
+  - [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
+  - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
+  - [Lab4: Controllers extend](#Lab4-Controllers-extend)
+  - [Lab5: Templates](#Lab5-Templates)
+  - [Lab6: Script Debugging](#Lab6-Script-Debugging)
+  - [Lab7: Reusing Code with a Decorator](#Lab7-Reusing-Code-with-a-Decorator)
+  - [Lab6: Reusing Code with a Local Include](#Lab6-Reusing-Code-with-a-Local-Include)
+  - [Lab8: Middleware](#Lab8-Middleware)
+  - [Lab9: Models and js decorators](#Lab9-Models-and-js-decorators)
+  - [Lab10: Creating Social Networks Links](#Lab10-Creating-Social-Networks-Links)
+  - [Lab11: Using Page Level Caching](#Lab11-Using-Page-Level-Caching)
+  - [Lab12: SFRA Forms](#Lab12-SFRA-Forms)
+  - [Lab13: ClickStream](#Lab13-ClickStream)
 - [Lab14: server.replace](#Lab14-serverreplace)
 
 
@@ -86,9 +87,11 @@ After your environment is set up, you can run the SFRA reference application and
 
 ## Lab1: Creating the Hello Controller
 
+In this lab we are going to create a simple controller which returns us template with custom object we created.
+
 **1. Create Hello.js controller**
 
-Navigate to your custom cartridge (in my case it's "*app_custom_storefront*") and create *Hello.js* controller.
+Navigate to your custom cartridge ( [here](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_adding_custom_cartridges.html?resultof=%22%63%61%72%74%72%69%64%67%65%22%20%22%63%61%72%74%72%69%64%67%22%20)  you can find guide how to add custom cartridges) (in my case it's "*app_custom_storefront*") and create *Hello.js* controller.
 
 - *your_cartridge_name/cartridge/controllers/Hello.js*
 
@@ -98,14 +101,14 @@ Navigate to your custom cartridge (in my case it's "*app_custom_storefront*") an
 var server = require('server');
 
 
-server.get('Show', function (req, res, next) {
-    var testObject = {
+server.get('Show', function (req, res, next) { //creating a simple endpoint which you can find by https://localhost/on/demandware.store/Sites-RefArch-Site/default/Hello-Show and registers the Show route for the Home module
+    var renderingData = {
         name: 'testname',
         email: 'testemail@astoundcommerce.com',
         type: 'object'
     }
-    res.render('hello/helloTemplate', {testObject: testObject});
-    next();
+    res.render('hello/helloTemplate', {renderingData: renderingData}); // returning in the response template 'hello/helloTemplate' with renderingData
+    next();//notifies middleware chain that it can move to the next step or terminate if this is the last step.
 });
 
 module.exports = server.exports();
@@ -125,7 +128,7 @@ Navigate to *your_cartridge_name/cartridge/templates/dafault/hello* folder and c
 
 <html>
     <head>
-        <title>${ Resource.msg('title') }</title>
+        <title>${ Resource.msg('title', <bundleName>, <defaultMessage>) }</title>
     </head>
     <body>
         <span> ${JSON.stringify(pdict.testObject)} </span>
@@ -133,9 +136,10 @@ Navigate to *your_cartridge_name/cartridge/templates/dafault/hello* folder and c
 </html>
 ```
 
-**3. Check your endpoint in browser**
+Learn how to work with properties files [here](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/DWAPI/scriptapi/html/api/class_dw_web_Resource.html?resultof=%22%52%65%73%6f%75%72%63%65%22%20%22%72%65%73%6f%75%72%63%22%20)
 
-Go to *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/Hello-Show* in your browser. And check or it works.
+**3. Check your endpoint in browser**
+Go to *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/default/Hello-Show* in your browser. And check or it works.
 **Do not forget to change url with your sandbox name**
 
 **4. If all works commit and push it to your branch**
