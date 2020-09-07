@@ -157,7 +157,20 @@ If you had any errors in [Lab1](#Lab1-Creating-the-Hello-Controller) you can fin
    2. Click burger icon in front of your instance you need
    3. Click LOGS
 
-    ![](./Screenshot_32.png)
+   ![](./Screenshot_33.png)
+
+Here you can find latest logs files sorting them by different filters at the top (time, name, size, last modifications)
+
+   ![](./Screenshot_34.png)
+
+**3. From Business Manager**
+
+Besides you can find Request Logs in Business Manager, by pressing Toolkit at the top, and then Request Log icon
+
+   ![](./Screenshot_35.png)
+
+   ![](./Screenshot_36.png)
+
 
 This log files display log entries related to the most recent request to the server from the storefront. Log entries related to requests to the server made while the Request Log is open are also displayed.
 
