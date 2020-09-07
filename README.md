@@ -157,6 +157,7 @@ If you had any errors in [Lab1](#Lab1-Creating-the-Hello-Controller) you can fin
    2. Click burger icon in front of your instance you need
    3. Click LOGS
 
+    ![](./Screenshot_32.png)
 
 This log files display log entries related to the most recent request to the server from the storefront. Log entries related to requests to the server made while the Request Log is open are also displayed.
 
