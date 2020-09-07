@@ -176,7 +176,9 @@ This log files display log entries related to the most recent request to the ser
 
 ## Lab3: Using the Controller Debugger
 
-This lab is about using debugger to debug controller execution. For this you need to create a controller, which gets the product by its ID, to create a Debug Configuration, start a Debugging Session and troubleshoot Debug Sessions. Please keep in mind, that described below debugger will work only for backend controllers, but not for frontend JS components.
+This lab is about using debugging controller execution. For this you need to create a controller, which gets the product by its ID, to create a Debug Configuration, start a Debugging Session and troubleshoot Debug Sessions. Please keep in mind, that described below debugger will work only for backend controllers, but not for frontend JS components.
+
+But first, you should update your search indexes. [Here](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/search_and_navigation/b2c_search_indexes.html?resultof=%22%69%6e%64%65%78%65%73%22%20%22%69%6e%64%65%78%22%20) you can find more information about this process. Without reindexing you might have some issues with updating products!!!
 
 **Important:** Please keep in mind that leaving debugger session idle for a long time could cause your Sandbox getting freezed.
 
@@ -191,18 +193,18 @@ var server = require('server');
 var ProductMgr = require('dw/catalog/ProductMgr');
 
 server.get('Main', function (req, res, next) {
-  var params = req.httpHeaders;
+  var params = req.httpHeaders; //saving http header in the link
 
-  if ('x-is-query_string' in params) {
+  if ('x-is-query_string' in params) { //checking query parameters in the link
     productID = params.get('x-is-query_string').split('=')[1];
   } else {
     productID = null;
   }
 
-  var product = ProductMgr.getProduct(productID);
+  var product = ProductMgr.getProduct(productID); // creating product instance with Product Manager method "getProduct
 
   if (product) {
-    res.render('productlab4/product', { Product: product });
+    res.render('productlab4/product', { Product: product }); //rendering template with passed parameters if product exists
   } else {
     res.render('productlab4/productnf', { Log: 'the product was not found: ' + productID });
   }
@@ -234,10 +236,15 @@ module.exports = server.exports();
 
         ![](Screenshot_19.png)
 
-   2. Open ShowProduct controller in VSC and add breakpoint on some of variables declaration lines. It should also appear in Breakpoints section in VSC.
+   2. Open ShowProduct controller in VSC (Ctrl+F7 ) and add breakpoint on some of variables declaration lines. It should also appear in Breakpoints section in VSC.
         ![](Screenshot_18.png)
 
    3. In a browser call ShowProduct-Start endpoint with random product ID like 123456, the url should look like: "...dware.net/on/demandware.store/Sites-RefArch-Site/en_US/ShowProduct-Main?product=4"
+    Besides you can check if the tested product actually exists in BM -> Merchant Tools -> Products & Catalogs -> Products
+        
+        ![](Screenshot_37.png)
+
+
    4. After url entered debugger will catch the breakpoint, stop execution and show current variables:
         ![](Screenshot_20.png)
 
