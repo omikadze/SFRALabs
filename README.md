@@ -9,9 +9,9 @@
   - [Setting Up and Installing SFRA](#Setting-Up-and-Installing-SFRA)
   - [Configure DwithEasy Extension for Chrome](#Configure-DwithEasy-Extension-for-Chrome)
   - [Lab1: Creating the Hello Controller](#Lab1-Creating-the-Hello-Controller)
-  - [Lab2: Finding an Error on a Controller](#Lab2-Finding-an-Error-on-a-Controller)
-  - [Lab3: Using the Controller Debugger](#Lab3-Using-the-Controller-Debugger)
-  - [Lab4: Controllers extend](#Lab4-Controllers-extend)
+  - [Lab2: Controllers extend](#Lab2-Controllers-extend)
+  - [Lab3: Finding an Error on a Controller](#Lab3-Finding-an-Error-on-a-Controller)
+  - [Lab4: Using the Controller Debugger](#Lab4-Using-the-Controller-Debugger)
   - [Lab5: Templates](#Lab5-Templates)
   - [Lab6: Script Debugging](#Lab6-Script-Debugging)
   - [Lab7: Reusing Code with a Decorator](#Lab7-Reusing-Code-with-a-Decorator)
@@ -145,7 +145,61 @@ Go to *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-Ref
 **4. If all works commit and push it to your branch**
 
 
-## Lab2: Finding an Error on a Controller
+## Lab2: Controllers extend
+
+
+Use the module.superModule mechanism to import the functionality from a controller and then override or add to it.
+
+
+module.superModule: Imports functionality from the first controller with the same name and location found to the right of the current cartridge on the cartridge path.
+![](Screenshot_38.png)
+
+![](Screenshot_39.png)
+
+
+server.extend: Inherits the existing server object and extends it with a list of new routes from the super module. In this case, it adds the routes from the module.superModule Project.js file.
+
+server.append: Modifies the Show route by appending middleware that adds properties to the viewData object for rendering. Using server.append causes a route to execute both the original middleware chain and any additional steps. If you're interacting with a web service or third-party system, don’t use server.append.
+
+res.getViewData: Gets the current viewData object from the response object.
+
+res.setViewData: Updates the viewData object used for rendering the template. Create your customized template in the same location and with the same name as the template rendered by the superModule controller. For example, if this controller inherits functionality from app_storefront_base, the rendering template depends on the product type being rendered. The rendering template can be either product/productDetails, product/bundleDetails, or product/setDetails.
+
+```javascript
+// Product.js
+
+'use strict';
+
+var server = require('server');
+var page = module.superModule;        //inherits functionality from next Product.js found to the right on the cartridge path
+server.extend(page);                  //extends existing server object with a list of new routes from the Product.js found by module.superModule
+
+server.append('Show', function (req, res, next) { //adds additional middleware
+    var viewData = res.getViewData();
+    viewData.product.reviews = [{
+        text: 'Lorem ipsum dolor sit amet, cibo utroque ne vis, has no sumo graece.' +
+          ' Dicta persius his id. Ea maluisset scripserit contentiones quo, est ne movet dicam.' +
+          ' Equidem scriptorem vis no. Civibus tacimates interpretaris has et,' +
+          ' ei offendit ocurreret vis, eos purto pertinax eleifend ea.',
+        rating: 3.5
+    }, {
+        text: 'Very short review',
+        rating: 5
+    }, {
+        text: 'Lorem ipsum dolor sit amet, cibo utroque ne vis, has no sumo graece.',
+        rating: 1.5
+    }];
+
+    res.setViewData(viewData);
+    next();
+});
+
+module.exports = server.exports();
+```
+
+
+
+## Lab3: Finding an Error on a Controller
 
 If you had any errors in [Lab1](#Lab1-Creating-the-Hello-Controller) you can find their description in [Log Files](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/storefront_toolkit/b2c_sftk_container.html) in two places: 
 
@@ -174,7 +228,7 @@ Besides you can find Request Logs in Business Manager, by pressing Toolkit at th
 
 This log files display log entries related to the most recent request to the server from the storefront. Log entries related to requests to the server made while the Request Log is open are also displayed.
 
-## Lab3: Using the Controller Debugger
+## Lab4: Using the Controller Debugger
 
 This lab is about using debugging controller execution. For this you need to create a controller, which gets the product by its ID, to create a Debug Configuration, start a Debugging Session and troubleshoot Debug Sessions. Please keep in mind, that described below debugger will work only for backend controllers, but not for frontend JS components.
 
@@ -251,61 +305,9 @@ module.exports = server.exports();
 
    5. Press F5 to continue execution. Since you have no templates created, execution should finish with an error (you can see it's details in Request Log).
 
-## Lab4: Controllers extend
-
-
-Use the module.superModule mechanism to import the functionality from a controller and then override or add to it.
-
-In this example, the Product.js controller uses the following APIs for customization:
-
-module.superModule: Imports functionality from the first controller with the same name and location found to the right of the current cartridge on the cartridge path.
-
-server.extend: Inherits the existing server object and extends it with a list of new routes from the super module. In this case, it adds the routes from the module.superModule Project.js file.
-
-server.append: Modifies the Show route by appending middleware that adds properties to the viewData object for rendering. Using server.append causes a route to execute both the original middleware chain and any additional steps. If you're interacting with a web service or third-party system, don’t use server.append.
-
-res.getViewData: Gets the current viewData object from the response object.
-
-res.setViewData: Updates the viewData object used for rendering the template. Create your customized template in the same location and with the same name as the template rendered by the superModule controller. For example, if this controller inherits functionality from app_storefront_base, the rendering template depends on the product type being rendered. The rendering template can be either product/productDetails, product/bundleDetails, or product/setDetails.
-
-```javascript
-// Product.js
-
-'use strict';
-
-var server = require('server');
-var page = module.superModule;        //inherits functionality from next Product.js found to the right on the cartridge path
-server.extend(page);                  //extends existing server object with a list of new routes from the Product.js found by module.superModule
-
-server.append('Show', function (req, res, next) { //adds additional middleware
-    var viewData = res.getViewData();
-    viewData.product.reviews = [{
-        text: 'Lorem ipsum dolor sit amet, cibo utroque ne vis, has no sumo graece.' +
-          ' Dicta persius his id. Ea maluisset scripserit contentiones quo, est ne movet dicam.' +
-          ' Equidem scriptorem vis no. Civibus tacimates interpretaris has et,' +
-          ' ei offendit ocurreret vis, eos purto pertinax eleifend ea.',
-        rating: 3.5
-    }, {
-        text: 'Very short review',
-        rating: 5
-    }, {
-        text: 'Lorem ipsum dolor sit amet, cibo utroque ne vis, has no sumo graece.',
-        rating: 1.5
-    }];
-
-    res.setViewData(viewData);
-    next();
-});
-
-module.exports = server.exports();
-```
-
-
-
 
 ## Lab5: Templates
-
-1. Create ISML template lab4/product.isml which shows the name of the Product. For this we use name property of the Product object, passed to the template by the controller:
+1. Create ISML template lab4/product.isml which shows the name of the [Product](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/DWAPI/scriptapi/html/api/class_dw_catalog_Product.html?resultof=%22%50%72%6f%64%75%63%74%22%20%22%70%72%6f%64%75%63%74%22%20%22%43%6c%61%73%73%22%20%22%63%6c%61%73%73%22%20). For this we use name property of the Product object, passed to the template by the controller:
       ```javascript
     <html>
         <head>
@@ -355,10 +357,6 @@ In this lab we summarize all work done in 4 previous WTs. You need to find in BM
 4. Call ShowProduct-Start on browser for some invalid product ID, verify if proper message appears.
 
 
-5. Commit and Push to new branch, create Pull Request
-
-
-
 ## Lab7: Reusing Code with a Decorator
 
 One more good way to reuse existing code is to use decorators. Decorator is an ISML template with which some content could be wrapped. Decorators are typically named with "pt_" prefix. In this WT you need to wrap a template with a decorator, to verify it's work and to find decorators used on the page using Storefront Toolkit.
@@ -382,6 +380,9 @@ One more good way to reuse existing code is to use decorators. Decorator is an I
         </isdecorate>
     ```
 
+    Client-side scripts and CSS files are set for each template using the assets.addJs and assets.addCss functions for each template. You can put *.css files and *.js files with the same names and in the same locations as indicated in the original template. This strategy overrides any like-named *.css files and *.js files in any cartridge to the right of the current cartridge on the cartridge path. [More](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/sfra/b2c_customizing_templates.html?resultof=%22%61%64%64%4a%73%22%20%22%61%64%64%6a%22%20)
+
+
    3.  Test the controller with an existing product:
     [your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/default/ShowProduct-Start?product=008884303989](http://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/default/ShowProduct-Start?product=008884303989)
 
@@ -392,7 +393,7 @@ One more good way to reuse existing code is to use decorators. Decorator is an I
    2. Mouse over the page to see the templates used to render areas of the page. For example:
         ![](Screenshot_24.png)
    3. Click one of the links to navigate to a specific template, i.e. the decorator. Expected result: the decorator file opens in Studio.
-   4. Back in the browser, select the Cache Information tool from the Storefront Toolkit.
+   4. Back in the browser, select the [Cache Information](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/storefront_toolkit/b2c_using_the_cache_information_tool.html) tool from the Storefront Toolkit.
         ![](Screenshot_25.png)
    5. Inspect the caching used for different templates in the page.
    6. Click on one of the links to open that file in Studio.
