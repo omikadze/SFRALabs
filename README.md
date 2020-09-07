@@ -147,27 +147,18 @@ Go to *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-Ref
 
 ## Lab2: Finding an Error on a Controller
 
-If you had any errors in [Lab1](#Lab1-Creating-the-Hello-Controller) you can find their description in 'Log Files' in two places: using the Request Log in [Storefront Toolkit](https://documentation.b2c.commercecloud.salesforce.com/DOC2/index.jsp?topic=%2Fcom.demandware.dochelp%2Fcontent%2Fb2c_commerce%2Ftopics%2Fstorefront_toolkit%2Fb2c_sftk_container.html) in top-left corner of your site page or using DWithEase Chrome extension we installed before. This log files display log entries related to the most recent request to the server from the storefront. Log entries related to requests to the server made while the Request Log is open are also displayed.
+If you had any errors in [Lab1](#Lab1-Creating-the-Hello-Controller) you can find their description in [Log Files](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/content/b2c_commerce/topics/storefront_toolkit/b2c_sftk_container.html) in two places: 
 
-**1. Use the Request Log:**
-   1. Using the URL you bookmarked, invoke the Hello controller with a missing start node: *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/Hello-Show*
-   2. Verify that an error occurs on the [storefront](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSiteDevelopment%2FViewStorefront.html&cp=0_1_6_8).
-   3. Mouse-over the upper-left corner of the page to re-enable [the Storefront Toolkit](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FStorefrontToolkit%2FStorefrontToolkit.html&resultof=%22Storefront%22%20%22storefront%22%20%22Toolkit%22%20%22toolkit%22%20).
-   4. From the toolkit, select [Request Log](https://documentation.b2c.commercecloud.salesforce.com/DOC1/index.jsp?topic=%2Fcom.demandware.dochelp%2FSTReference%2FRequestlogtool.html&resultof=%22Request%22%20%22request%22%20%22Log%22%20%22log%22%20).
-   5. Re-login to Business Manager if required and reopen the request log.
-   6. Read the request log to find the error message.
-   7. Correct the controller invocation (Hello-World) and refresh the page.
-   8. In the browser, retest the Hello-World Controller.
-   9. Use the Request Log to determine what error occurs.
-   10. Correct the error and retest.
+**1. Request Log** in [Storefront Toolkit](https://documentation.b2c.commercecloud.salesforce.com/DOC2/index.jsp?topic=%2Fcom.demandware.dochelp%2Fcontent%2Fb2c_commerce%2Ftopics%2Fstorefront_toolkit%2Fb2c_sftk_container.html) in top-left corner of your site page
 
 
-**2. Use the Problem View**
-   1. Remove the interaction node from the controller.
-   2. Look in the Problems view in the Controller Editor.
-   3. Fix the error.
-   4. Retest the Hello-World controller to make sure it works.
+**2. DWithEase browser extension** we installed before.
+   1. Click DWithEase extension icon in your browser
+   2. Click burger icon in front of your instance you need
+   3. Click LOGS
 
+
+This log files display log entries related to the most recent request to the server from the storefront. Log entries related to requests to the server made while the Request Log is open are also displayed.
 
 ## Lab3: Using the Controller Debugger
 
