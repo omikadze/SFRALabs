@@ -854,7 +854,7 @@ To see how it works go to: */cartridge/models/product/decorators/index.js where 
 'use strict';
 
 module.exports = function (object, apiProduct, type) {
-    Object.defineProperty(object, 'uuid', {
+    Object.defineProperty(object, 'uuid', { //The static method Object.defineProperty() defines a new property directly on an object, or modifies an existing property on an object, and returns the object.
         enumerable: true,
         value: apiProduct.UUID
     });
@@ -1217,6 +1217,8 @@ This walkthrough is about Page Level Caching, here you need to turn on general C
 
 ## Lab12: SFRA Forms
 
+in this lab we will create a custom form, which saves some inputs and then renders a template with entered by user information on the screen
+
 **Summary**
 
 Task is dedicated to establish/improve/increase skills and knowledge of SFRA Forms and related functionality.
@@ -1242,7 +1244,7 @@ Task is dedicated to establish/improve/increase skills and knowledge of SFRA For
 2. Create custom controller with the related to the task logic. It should contains such parts as:
     1. clear form
     2. populate form with value
-    3. validate/invalidate form
+    3. [validate/invalidate form](https://documentation.b2c.commercecloud.salesforce.com/DOC2/topic/com.demandware.dochelp/LegacyDevDoc/FormValidation.html?resultof=%22%66%6f%72%6d%22%20)
     4. interaction continue node which leads to the particular logic - according to triggered action
     5. several interaction nodes or dynamic interaction node
     6. particular interaction templates
@@ -1442,5 +1444,5 @@ This template prints the form field label and data stored from the form.
     Example: replacing the Product-Varation route
 
     In your custom cartridge, create a Product.js file in the same location as the Product.js file in the base cartridge. Use the following code to import the functionality of Product.js and redefine it.
-    
+![](Screenshot_40.png)
 ![](Screenshot_29.png)
