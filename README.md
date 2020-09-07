@@ -147,7 +147,7 @@ Go to *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-Ref
 
 ## Lab2: Finding an Error on a Controller
 
-If you had any problems in [Lab1](#Lab1-Creating-the-Hello-Controller) you can figure it out in two ways: using the Request Log, the Problem View or using DWithEase in your browser we installed before.
+If you had any errors in [Lab1](#Lab1-Creating-the-Hello-Controller) you can find their description in 'Log Files' in two places: using the Request Log in [Storefront Toolkit](#https://documentation.b2c.commercecloud.salesforce.com/DOC2/index.jsp?topic=%2Fcom.demandware.dochelp%2Fcontent%2Fb2c_commerce%2Ftopics%2Fstorefront_toolkit%2Fb2c_sftk_container.html) in top-left corner of your site page or using DWithEase Chrome extension we installed before. This log files display log entries related to the most recent request to the server from the storefront. Log entries related to requests to the server made while the Request Log is open are also displayed.
 
 **1. Use the Request Log:**
    1. Using the URL you bookmarked, invoke the Hello controller with a missing start node: *https://your-sandbox-name-dw.demandware.net/on/demandware.store/Sites-RefArch-Site/en_US/Hello-Show*
